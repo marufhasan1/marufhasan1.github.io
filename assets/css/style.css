@@ -347,6 +347,7 @@ input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-
     box-shadow:0 1px 31px rgba(0,0,0,.09);
     cursor:pointer
 }
+/* Resume Style Start here */
 .resume-list{
     margin-top:30px;
     margin-bottom:30px
@@ -397,6 +398,9 @@ input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-
     line-height:20px;
     color:#999;
     padding-bottom:10px
+}
+.resume-list .resume-list__block .education_details a{
+    color: inherit;
 }
 .post-cards{
     margin-bottom:40px
