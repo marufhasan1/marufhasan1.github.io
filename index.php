@@ -111,7 +111,7 @@
       <div class="col-md-10">
         <h2 id="hello_header" class="section__title">Hi_</h2>
         <p class="section__description">
-          I am MD. Maruf Hasan an Web developer able to build a Web presence from the ground up - from concept, navigation,
+          I am MD. Maruf Hasan an web developer able to build a Web presence from the ground up - from concept, navigation,
           layout and programming to UX and SEO. Skilled at writing well-designed, testable and efficient code using
           current best practices in Web development. Fast learner, hard worker and team player who is proficient in
           an array of scripting languages and multimedia Web tools.
@@ -168,45 +168,39 @@
       <div class="col-md-8 section__resume resume-list">
         <h3 class="resume-list_title">employment</h3>
         <div class="resume-list__block">
-          <p class="resume-list__block-title">Apple</p>
-          <p class="resume-list__block-date">2006 - 2010</p>
+          <p class="resume-list__block-title"><a href="https://usitsolution.net/">US IT Solution LLC</a></p>
+          <p class="resume-list__block-date">2018 - Cont.</p>
           <p>
-            Senior Full Stack Developer
+            Full Stack Developer
           </p>
         </div>
         <div class="resume-list__block">
-          <p class="resume-list__block-title">Tech university</p>
-          <p class="resume-list__block-date">2004 - 2005</p>
+          <p class="resume-list__block-title"><a href="https://freelanceitlab.com/">Freelance IT Lab</a></p>
+          <p class="resume-list__block-date">2016 - 2018</p>
           <p>
-            Awesome developer, lorem ipsum dolor sit amet, conse ctetur adipisicing elit, sed do eius-
-            mod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
-          </p>
-        </div>
-        <div class="resume-list__block">
-          <p class="resume-list__block-title">Molly’s studio</p>
-          <p class="resume-list__block-date">2003 - 2006</p>
-          <p>
-            Programmer Lorem ipsum dolor sit amet, consecte tur adipisicing elit, sed do eiusmod tempor
-            incididunt ut
+            Full Stack Developer
           </p>
         </div>
       </div>
     </div>
+
+
     <div class="row section__resume progress-list js-progress-list">
       <div class="col-md-12">
-        <h3 class="progress-list__title">general skills</h3>
+        <h3 class="progress-list__title">skills frontend</h3>
       </div>
       <div class="col-md-5 mr-auto">
         <div class="progress-list__skill">
           <p>
             <span class="progress-list__skill-title">html5</span>
-            <span class="progress-list__skill-value">80%</span>
+            <span class="progress-list__skill-value">90%</span>
           </p>
           <div class="progress">
             <div class="progress-bar" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" >
             </div>
           </div>
         </div>
+
         <div class="progress-list__skill">
           <p>
             <span class="progress-list__skill-title">css3</span>
@@ -217,19 +211,10 @@
             </div>
           </div>
         </div>
+
         <div class="progress-list__skill">
           <p>
-            <span class="progress-list__skill-title">java script</span>
-            <span class="progress-list__skill-value">90%</span>
-          </p>
-          <div class="progress">
-            <div class="progress-bar" role="progressbar" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100">
-            </div>
-          </div>
-        </div>
-        <div class="progress-list__skill">
-          <p>
-            <span class="progress-list__skill-title">jquery</span>
+            <span class="progress-list__skill-title">bootstrap 3</span>
             <span class="progress-list__skill-value">80%</span>
           </p>
           <div class="progress">
@@ -241,27 +226,7 @@
       <div class="col-md-5 mr-auto">
         <div class="progress-list__skill">
           <p>
-            <span class="progress-list__skill-title">bootstrap 3</span>
-            <span class="progress-list__skill-value">80%</span>
-          </p>
-          <div class="progress">
-            <div class="progress-bar" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100">
-            </div>
-          </div>
-        </div>
-        <div class="progress-list__skill">
-          <p>
-            <span class="progress-list__skill-title">grunt</span>
-            <span class="progress-list__skill-value">60%</span>
-          </p>
-          <div class="progress">
-            <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100">
-            </div>
-          </div>
-        </div>
-        <div class="progress-list__skill">
-          <p>
-            <span class="progress-list__skill-title">git</span>
+            <span class="progress-list__skill-title">java script</span>
             <span class="progress-list__skill-value">90%</span>
           </p>
           <div class="progress">
@@ -269,9 +234,10 @@
             </div>
           </div>
         </div>
+
         <div class="progress-list__skill">
           <p>
-            <span class="progress-list__skill-title">adobe photoshop</span>
+            <span class="progress-list__skill-title">jquery</span>
             <span class="progress-list__skill-value">80%</span>
           </p>
           <div class="progress">
@@ -279,8 +245,108 @@
             </div>
           </div>
         </div>
+
+        <div class="progress-list__skill">
+          <p>
+            <span class="progress-list__skill-title">Angular JS</span>
+            <span class="progress-list__skill-value">70%</span>
+          </p>
+          <div class="progress">
+            <div class="progress-bar" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100">
+            </div>
+          </div>
+        </div>
+
       </div>
     </div>
+
+
+
+    <div class="row section__resume progress-list js-progress-list">
+      <div class="col-md-12">
+        <h3 class="progress-list__title">skills Server Side</h3>
+      </div>
+      <div class="col-md-5 mr-auto">
+        <div class="progress-list__skill">
+          <p>
+            <span class="progress-list__skill-title">PHP</span>
+            <span class="progress-list__skill-value">80%</span>
+          </p>
+          <div class="progress">
+            <div class="progress-bar" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" >
+            </div>
+          </div>
+        </div>
+
+        <div class="progress-list__skill">
+          <p>
+            <span class="progress-list__skill-title">My Sql</span>
+            <span class="progress-list__skill-value">60%</span>
+          </p>
+          <div class="progress">
+            <div class="progress-bar" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100">
+            </div>
+          </div>
+        </div>
+
+        <div class="progress-list__skill">
+          <p>
+            <span class="progress-list__skill-title">Laravel</span>
+            <span class="progress-list__skill-value">70%</span>
+          </p>
+          <div class="progress">
+            <div class="progress-bar" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100">
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-5 mr-auto">
+        <div class="progress-list__skill">
+          <p>
+            <span class="progress-list__skill-title">Codeigniter</span>
+            <span class="progress-list__skill-value">90%</span>
+          </p>
+          <div class="progress">
+            <div class="progress-bar" role="progressbar" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100">
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+
+
+    <div class="row section__resume progress-list js-progress-list">
+      <div class="col-md-12">
+        <h3 class="progress-list__title">Others Skills</h3>
+      </div>
+      <div class="col-md-5 mr-auto">
+        <div class="progress-list__skill">
+          <p>
+            <span class="progress-list__skill-title">Adobe Photoshop</span>
+            <span class="progress-list__skill-value">50%</span>
+          </p>
+          <div class="progress">
+            <div class="progress-bar" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" >
+            </div>
+          </div>
+        </div>
+
+        <div class="progress-list__skill">
+          <p>
+            <span class="progress-list__skill-title">Adobe Illustrator</span>
+            <span class="progress-list__skill-value">65%</span>
+          </p>
+          <div class="progress">
+            <div class="progress-bar" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100">
+            </div>
+          </div>
+        </div>
+    </div>
+
+
+
   </section>
 <!--Resume-->
 
