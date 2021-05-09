@@ -1,0 +1,4 @@
+This is a Brave Rewards publisher verification file.
+
+Domain: marufhasan.net
+Token: 5115d3e64fabbe81ffc670c2feb8a1f0f9d83d5444627fdf4e2fbb75473cf91c
