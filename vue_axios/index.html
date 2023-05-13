@@ -8,6 +8,7 @@
 </head>
 <body>
     <div id="app">{{ message }}</div>
+    <button type="button" @click="sendPrinterJob()">Click</button>
 
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
@@ -22,7 +23,11 @@
         },
         mounted(){
 
-            axios.post('http://localhost:3000',{
+
+        },
+        methods:{
+            sendPrinterJob(){
+                axios.post('http://10.10.10.155:3000',{
                 layout:'quarantined_data',
                 page_data:'[[[{"is_visible":1,"data":{"name":"Omeprazole Pellets 8.5%","batch_lot_no":"BC09/123","challan_no":null,"code_no":6117,"grn_no":"RMI-00044/23","supplier":"CITY GROUP","container":"1 of 17","quantity":"60 KG","mfg_date":"10-05-2023","exp_date":"31-12-2023","remarks":" "}},{"is_visible":1,"data":{"name":"Omeprazole Pellets 8.5%","batch_lot_no":"BC09/123","challan_no":null,"code_no":6117,"grn_no":"RMI-00044/23","supplier":"CITY GROUP","container":"2 of 17","quantity":"60 KG","mfg_date":"10-05-2023","exp_date":"31-12-2023","remarks":" "}}],[{"is_visible":1,"data":{"name":"Omeprazole Pellets 8.5%","batch_lot_no":"BC09/123","challan_no":null,"code_no":6117,"grn_no":"RMI-00044/23","supplier":"CITY GROUP","container":"3 of 17","quantity":"60 KG","mfg_date":"10-05-2023","exp_date":"31-12-2023","remarks":" "}},{"is_visible":0,"data":null}],[{"is_visible":0,"data":null},{"is_visible":0,"data":null}]]]'
             },{
@@ -37,7 +42,7 @@
             .catch(function (error) {
                 console.log(error);
             });
-
+            }
         }
       }).mount('#app')
     </script>
