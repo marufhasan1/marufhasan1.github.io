@@ -1,0 +1,804 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gallery — MD. Maruf Hasan</title>
+  <meta name="description" content="A personal gallery of moments — travels, work life, events and more by MD. Maruf Hasan." />
+
+  <!-- Favicon -->
+  <link rel="icon" href="../favicon.ico" />
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace'],
+          },
+          colors: {
+            primary: {
+              50:  '#f0f4ff', 100: '#e0eaff', 200: '#c7d7fe',
+              300: '#a5b4fc', 400: '#818cf8', 500: '#6366f1',
+              600: '#4f46e5', 700: '#4338ca', 800: '#3730a3', 900: '#312e81',
+            },
+            surface: {
+              900: '#0b0f1a', 800: '#111827', 700: '#1f2937', 600: '#374151',
+            }
+          },
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* ── Reset & Base ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #0b0f1a;
+      color: #e2e8f0;
+      overflow-x: hidden;
+    }
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: #111827; }
+    ::-webkit-scrollbar-thumb { background: #4f46e5; border-radius: 3px; }
+    ::selection { background: #4f46e5; color: #fff; }
+
+    /* ── Gradient text ── */
+    .gradient-text {
+      background: linear-gradient(135deg, #818cf8 0%, #a78bfa 50%, #38bdf8 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    /* ── Glass card ── */
+    .card-glass {
+      background: rgba(31, 41, 55, 0.6);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(99, 102, 241, 0.15);
+    }
+
+    /* ── Navbar ── */
+    #navbar { transition: background .4s, box-shadow .4s; }
+    #navbar.scrolled {
+      background: rgba(11, 15, 26, 0.95) !important;
+      backdrop-filter: blur(20px);
+      box-shadow: 0 1px 30px rgba(0,0,0,.5);
+    }
+    .nav-link {
+      position: relative;
+      transition: color .3s;
+    }
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: -2px; left: 0;
+      width: 0; height: 2px;
+      background: linear-gradient(90deg, #818cf8, #38bdf8);
+      border-radius: 1px;
+      transition: width .3s ease;
+    }
+    .nav-link:hover::after,
+    .nav-link.active::after { width: 100%; }
+    .nav-link.active { color: #818cf8; }
+
+    /* ── Buttons ── */
+    .btn-primary {
+      display: inline-flex; align-items: center; gap: .5rem;
+      padding: .75rem 1.75rem; border-radius: .75rem;
+      font-weight: 600; font-size: .9rem;
+      background: linear-gradient(135deg, #6366f1, #4f46e5);
+      color: #fff; border: 1px solid rgba(99,102,241,.4);
+      transition: box-shadow .3s, transform .2s;
+      cursor: pointer; text-decoration: none;
+    }
+    .btn-primary:hover { box-shadow: 0 8px 30px rgba(99,102,241,.45); transform: translateY(-2px); }
+    .btn-outline {
+      display: inline-flex; align-items: center; gap: .5rem;
+      padding: .75rem 1.75rem; border-radius: .75rem;
+      font-weight: 600; font-size: .9rem;
+      background: transparent; color: #a5b4fc;
+      border: 1px solid rgba(99,102,241,.35);
+      transition: border-color .3s, background .3s, transform .2s;
+      cursor: pointer; text-decoration: none;
+    }
+    .btn-outline:hover { border-color: rgba(99,102,241,.7); background: rgba(99,102,241,.1); transform: translateY(-2px); }
+
+    /* ── Eyebrow ── */
+    .section-eyebrow {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .75rem; letter-spacing: .12em;
+      text-transform: uppercase; color: #818cf8;
+    }
+
+    /* ── Hero mesh ── */
+    .hero-mesh {
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse 70% 60% at 15% 50%, rgba(99,102,241,.16) 0%, transparent 60%),
+        radial-gradient(ellipse 60% 50% at 85% 40%, rgba(56,189,248,.10) 0%, transparent 60%);
+      z-index: 0;
+    }
+
+    /* ── Filter tabs ── */
+    .filter-btn {
+      padding: .45rem 1.2rem;
+      border-radius: 9999px;
+      font-size: .82rem; font-weight: 500;
+      border: 1px solid rgba(99,102,241,.2);
+      color: #9ca3af;
+      background: transparent;
+      cursor: pointer;
+      transition: all .25s;
+      white-space: nowrap;
+    }
+    .filter-btn:hover { border-color: rgba(99,102,241,.5); color: #c7d2fe; background: rgba(99,102,241,.08); }
+    .filter-btn.active {
+      background: linear-gradient(135deg, #6366f1, #4f46e5);
+      border-color: transparent;
+      color: #fff;
+      box-shadow: 0 4px 15px rgba(99,102,241,.35);
+    }
+
+    /* ── Masonry grid ── */
+    .masonry {
+      columns: 3;
+      column-gap: 1.25rem;
+    }
+    @media (max-width: 1024px) { .masonry { columns: 2; } }
+    @media (max-width: 640px)  { .masonry { columns: 1; } }
+
+    .masonry-item {
+      break-inside: avoid;
+      margin-bottom: 1.25rem;
+      border-radius: 1rem;
+      overflow: hidden;
+      cursor: pointer;
+      position: relative;
+    }
+    .masonry-item img {
+      width: 100%;
+      display: block;
+      transition: transform .45s cubic-bezier(.4,0,.2,1);
+    }
+    .masonry-item:hover img { transform: scale(1.04); }
+
+    /* Item overlay */
+    .masonry-item .item-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(11,15,26,.88) 0%, rgba(11,15,26,.1) 60%, transparent 100%);
+      opacity: 0;
+      transition: opacity .35s;
+      display: flex; flex-direction: column; justify-content: flex-end;
+      padding: 1.25rem;
+    }
+    .masonry-item:hover .item-overlay { opacity: 1; }
+    .masonry-item .item-overlay .caption { transform: translateY(8px); transition: transform .35s; }
+    .masonry-item:hover .item-overlay .caption { transform: translateY(0); }
+
+    /* Category badge on card */
+    .cat-badge {
+      display: inline-flex; align-items: center; gap: .35rem;
+      font-size: .7rem; font-weight: 600;
+      text-transform: uppercase; letter-spacing: .08em;
+      padding: .25rem .65rem; border-radius: 9999px;
+      background: rgba(99,102,241,.3);
+      backdrop-filter: blur(6px);
+      border: 1px solid rgba(99,102,241,.4);
+      color: #c7d2fe;
+    }
+
+    /* Placeholder card (no real photo yet) */
+    .photo-placeholder {
+      width: 100%;
+      display: flex; align-items: center; justify-content: center;
+      flex-direction: column; gap: .75rem;
+      color: rgba(99,102,241,.4);
+      user-select: none;
+    }
+
+    /* ── Reveal ── */
+    .reveal { opacity: 0; transform: translateY(24px); transition: opacity .6s ease, transform .6s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* ── Lightbox ── */
+    #lightbox {
+      position: fixed; inset: 0; z-index: 9999;
+      background: rgba(7, 10, 18, 0.97);
+      backdrop-filter: blur(20px);
+      display: flex; align-items: center; justify-content: center;
+      opacity: 0; pointer-events: none;
+      transition: opacity .3s ease;
+    }
+    #lightbox.open { opacity: 1; pointer-events: all; }
+
+    #lightbox-img-wrap {
+      position: relative;
+      max-width: min(90vw, 1000px);
+      max-height: 85vh;
+      display: flex; align-items: center; justify-content: center;
+    }
+    #lightbox-img {
+      max-width: 100%; max-height: 85vh;
+      border-radius: 1rem;
+      box-shadow: 0 30px 80px rgba(0,0,0,.8);
+      object-fit: contain;
+      transition: opacity .25s;
+    }
+
+    .lb-btn {
+      position: absolute; top: 50%; transform: translateY(-50%);
+      width: 48px; height: 48px; border-radius: 50%;
+      background: rgba(31,41,55,.8); backdrop-filter: blur(8px);
+      border: 1px solid rgba(99,102,241,.3);
+      color: #a5b4fc; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      transition: background .2s, border-color .2s, transform .2s;
+      flex-shrink: 0;
+    }
+    .lb-btn:hover { background: rgba(99,102,241,.3); border-color: rgba(99,102,241,.6); transform: translateY(-50%) scale(1.1); }
+    #lb-prev { left: -64px; }
+    #lb-next { right: -64px; }
+    @media (max-width: 700px) {
+      #lb-prev { left: 8px; }
+      #lb-next { right: 8px; }
+    }
+
+    #lb-close {
+      position: absolute; top: 1rem; right: 1rem;
+      width: 44px; height: 44px; border-radius: 50%;
+      background: rgba(31,41,55,.8); backdrop-filter: blur(8px);
+      border: 1px solid rgba(255,255,255,.1);
+      color: #9ca3af; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      transition: background .2s, color .2s;
+    }
+    #lb-close:hover { background: rgba(239,68,68,.2); color: #f87171; }
+
+    #lb-info {
+      position: absolute; bottom: 1.5rem; left: 50%; transform: translateX(-50%);
+      text-align: center; pointer-events: none;
+      width: max-content; max-width: 90vw;
+    }
+
+    #lb-counter {
+      position: absolute; top: 1.5rem; left: 50%; transform: translateX(-50%);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .75rem; color: #6b7280;
+      background: rgba(17,24,39,.7); backdrop-filter: blur(8px);
+      padding: .3rem .85rem; border-radius: 9999px;
+      border: 1px solid rgba(255,255,255,.06);
+    }
+
+    /* ── Shape ── */
+    .shape { position: absolute; border-radius: 50%; filter: blur(80px); pointer-events: none; z-index: 0; }
+
+    /* ── Mobile menu ── */
+    #mobile-menu { transition: transform .35s cubic-bezier(.4,0,.2,1), opacity .35s; }
+    #mobile-menu.hidden { transform: translateX(100%); opacity: 0; pointer-events: none; }
+
+    /* ── Upload tip card ── */
+    .tip-card {
+      background: rgba(99,102,241,.06);
+      border: 1px dashed rgba(99,102,241,.3);
+      border-radius: 1rem; padding: 1.25rem;
+    }
+  </style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════ NAVBAR ══ -->
+<header id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300">
+  <nav class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
+    <a href="index.html" class="flex items-center gap-2 group">
+      <span class="font-mono text-primary-400 text-lg font-bold group-hover:text-primary-300 transition-colors">&lt;MH /&gt;</span>
+    </a>
+
+    <ul class="hidden md:flex items-center gap-8 text-sm font-medium">
+      <li><a href="index.html#about"      class="nav-link text-gray-400 hover:text-white">About</a></li>
+      <li><a href="index.html#skills"     class="nav-link text-gray-400 hover:text-white">Skills</a></li>
+      <li><a href="index.html#experience" class="nav-link text-gray-400 hover:text-white">Experience</a></li>
+      <li><a href="index.html#projects"   class="nav-link text-gray-400 hover:text-white">Projects</a></li>
+      <li><a href="gallery.html"          class="nav-link active text-gray-400 hover:text-white">Gallery</a></li>
+      <li><a href="index.html#contact"    class="nav-link text-gray-400 hover:text-white">Contact</a></li>
+    </ul>
+
+    <div class="hidden md:flex items-center gap-3">
+      <a href="../cv.pdf" target="_blank" class="btn-outline text-sm py-2 px-4">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+        Resume
+      </a>
+    </div>
+
+    <button id="hamburger" class="md:hidden p-2 rounded-lg text-gray-400 hover:text-white hover:bg-white/5 transition">
+      <svg id="icon-open"  class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+      <svg id="icon-close" class="w-6 h-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+    </button>
+  </nav>
+
+  <div id="mobile-menu" class="hidden fixed inset-0 top-[69px] bg-surface-900/98 backdrop-blur-xl z-40 flex flex-col items-center justify-center gap-8 md:hidden">
+    <a href="index.html#about"      class="text-2xl font-semibold text-gray-300 hover:text-white mobile-nav">About</a>
+    <a href="index.html#skills"     class="text-2xl font-semibold text-gray-300 hover:text-white mobile-nav">Skills</a>
+    <a href="index.html#experience" class="text-2xl font-semibold text-gray-300 hover:text-white mobile-nav">Experience</a>
+    <a href="index.html#projects"   class="text-2xl font-semibold text-gray-300 hover:text-white mobile-nav">Projects</a>
+    <a href="gallery.html"          class="text-2xl font-semibold text-primary-400 mobile-nav">Gallery</a>
+    <a href="index.html#contact"    class="text-2xl font-semibold text-gray-300 hover:text-white mobile-nav">Contact</a>
+    <a href="../cv.pdf" target="_blank" class="btn-primary mt-4">Download Resume</a>
+  </div>
+</header>
+
+
+<!-- ══════════════════════════════════════ HERO ══ -->
+<section class="relative pt-36 pb-20 overflow-hidden">
+  <div class="hero-mesh"></div>
+  <div class="shape w-96 h-96 bg-primary-500/10 -top-20 -left-32"></div>
+  <div class="shape w-72 h-72 bg-sky-500/8 top-10 -right-16"></div>
+
+  <div class="relative z-10 max-w-6xl mx-auto px-6 text-center">
+    <div class="reveal">
+      <span class="section-eyebrow">Personal moments</span>
+    </div>
+    <h1 class="reveal mt-4 text-4xl sm:text-5xl lg:text-6xl font-black leading-tight">
+      My <span class="gradient-text">Gallery</span>
+    </h1>
+    <p class="reveal mt-5 text-gray-400 text-lg max-w-xl mx-auto leading-relaxed">
+      A collection of moments — travels, team gatherings, workspace snapshots, and slices of everyday life.
+    </p>
+
+    <!-- Stats row -->
+    <div class="reveal mt-10 flex flex-wrap items-center justify-center gap-8">
+      <div class="text-center">
+        <div id="stat-photos" class="text-3xl font-black gradient-text">0</div>
+        <div class="text-gray-500 text-sm mt-1">Photos</div>
+      </div>
+      <div class="w-px h-10 bg-white/10 hidden sm:block"></div>
+      <div class="text-center">
+        <div id="stat-cats" class="text-3xl font-black gradient-text">0</div>
+        <div class="text-gray-500 text-sm mt-1">Categories</div>
+      </div>
+      <div class="w-px h-10 bg-white/10 hidden sm:block"></div>
+      <div class="text-center">
+        <div class="text-3xl font-black gradient-text">∞</div>
+        <div class="text-gray-500 text-sm mt-1">Memories</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════ GALLERY ══ -->
+<section class="relative py-10 pb-28">
+  <div class="max-w-6xl mx-auto px-6">
+
+    <!-- Filter bar -->
+    <div class="reveal flex flex-wrap items-center gap-2.5 mb-10" id="filter-bar">
+      <button class="filter-btn active" data-filter="all">
+        <span class="flex items-center gap-1.5">
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+          All
+        </span>
+      </button>
+      <button class="filter-btn" data-filter="travel">
+        <span class="flex items-center gap-1.5">
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+          Travel
+        </span>
+      </button>
+      <button class="filter-btn" data-filter="work">
+        <span class="flex items-center gap-1.5">
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01"/></svg>
+          Work & Tech
+        </span>
+      </button>
+      <button class="filter-btn" data-filter="events">
+        <span class="flex items-center gap-1.5">
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0"/></svg>
+          Events
+        </span>
+      </button>
+      <button class="filter-btn" data-filter="life">
+        <span class="flex items-center gap-1.5">
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg>
+          Life
+        </span>
+      </button>
+      <button class="filter-btn" data-filter="nature">
+        <span class="flex items-center gap-1.5">
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"/></svg>
+          Nature
+        </span>
+      </button>
+
+      <!-- Photo count -->
+      <div class="ml-auto font-mono text-xs text-gray-600 hidden sm:block" id="visible-count"></div>
+    </div>
+
+    <!-- Masonry grid -->
+    <div class="masonry" id="gallery-grid"></div>
+
+    <!-- Empty state -->
+    <div id="empty-state" class="hidden text-center py-20">
+      <div class="w-16 h-16 mx-auto rounded-2xl bg-primary-500/10 border border-primary-500/20 flex items-center justify-center mb-4">
+        <svg class="w-8 h-8 text-primary-500/40" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+      </div>
+      <p class="text-gray-500">No photos in this category yet.</p>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════ HOW TO ADD PHOTOS (tip) ══ -->
+<section class="py-16 bg-surface-800/30">
+  <div class="max-w-3xl mx-auto px-6">
+    <div class="reveal tip-card">
+      <div class="flex items-start gap-4">
+        <div class="w-10 h-10 rounded-xl bg-primary-500/15 flex items-center justify-center flex-shrink-0 mt-0.5">
+          <svg class="w-5 h-5 text-primary-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+        </div>
+        <div>
+          <h3 class="text-white font-semibold mb-2">How to add your photos</h3>
+          <p class="text-gray-400 text-sm leading-relaxed mb-3">
+            Place your images inside <code class="text-primary-400 font-mono bg-primary-500/10 px-1.5 py-0.5 rounded">new_version/gallery/</code> and add entries to the <code class="text-primary-400 font-mono bg-primary-500/10 px-1.5 py-0.5 rounded">photos</code> array in the script below. Each entry supports:
+          </p>
+          <pre class="bg-surface-900 rounded-xl p-4 text-sm font-mono text-gray-300 overflow-x-auto leading-relaxed"><span class="text-primary-400">{</span>
+  src:      <span class="text-emerald-400">"gallery/your-photo.jpg"</span>,
+  thumb:    <span class="text-emerald-400">"gallery/your-photo-thumb.jpg"</span>, <span class="text-gray-600">// optional</span>
+  caption:  <span class="text-emerald-400">"A short caption"</span>,
+  location: <span class="text-emerald-400">"Dhaka, Bangladesh"</span>,
+  date:     <span class="text-emerald-400">"March 2025"</span>,
+  category: <span class="text-emerald-400">"travel"</span>  <span class="text-gray-600">// travel | work | events | life | nature</span>
+<span class="text-primary-400">}</span></pre>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════ FOOTER ══ -->
+<footer class="border-t border-white/5 py-10">
+  <div class="max-w-6xl mx-auto px-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-gray-500">
+    <div class="flex items-center gap-2">
+      <span class="font-mono text-primary-400 font-bold">&lt;MH /&gt;</span>
+      <span>MD. Maruf Hasan</span>
+    </div>
+    <div>Built with HTML, TailwindCSS &amp; JavaScript</div>
+    <div>&copy; <span id="footer-year"></span> All rights reserved.</div>
+  </div>
+</footer>
+
+
+<!-- ══════════════════════════════════════ LIGHTBOX ══ -->
+<div id="lightbox" role="dialog" aria-modal="true" aria-label="Photo viewer">
+  <!-- Close -->
+  <button id="lb-close" aria-label="Close lightbox">
+    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+  </button>
+
+  <!-- Counter -->
+  <div id="lb-counter">1 / 1</div>
+
+  <!-- Image wrapper -->
+  <div id="lightbox-img-wrap">
+    <button class="lb-btn" id="lb-prev" aria-label="Previous photo">
+      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+    </button>
+    <img id="lightbox-img" src="" alt="" />
+    <button class="lb-btn" id="lb-next" aria-label="Next photo">
+      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+    </button>
+  </div>
+
+  <!-- Info -->
+  <div id="lb-info">
+    <p id="lb-caption" class="text-white font-semibold text-base mb-1"></p>
+    <p id="lb-meta" class="text-gray-400 text-sm font-mono"></p>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════ SCRIPTS ══ -->
+<script>
+// ════════════════════════════════════════════════════
+//  PHOTO DATA — add your photos here
+//  Place images in: new_version/gallery/
+// ════════════════════════════════════════════════════
+const photos = [
+  // ── EXAMPLES (replace src with your real images) ──
+  // {
+  //   src:      "gallery/photo1.jpg",
+  //   caption:  "Weekend in Cox's Bazar",
+  //   location: "Cox's Bazar, Bangladesh",
+  //   date:     "January 2025",
+  //   category: "travel"
+  // },
+  // {
+  //   src:      "gallery/photo2.jpg",
+  //   caption:  "Team lunch at office",
+  //   location: "Dhaka, Bangladesh",
+  //   date:     "February 2025",
+  //   category: "work"
+  // },
+
+  // ── PLACEHOLDER cards (shown when no real photos exist) ──
+  { placeholder: true, caption: "Cox's Bazar Trip",       location: "Cox's Bazar, BD",  date: "Jan 2025",  category: "travel",  color: "from-indigo-900/80 to-sky-900/80",    icon: "travel"  },
+  { placeholder: true, caption: "Sunset at Padma River",  location: "Rajshahi, BD",     date: "Dec 2024",  category: "nature",  color: "from-amber-900/80 to-orange-900/80",  icon: "nature"  },
+  { placeholder: true, caption: "Office Team Lunch",      location: "Dhaka, BD",        date: "Feb 2025",  category: "work",    color: "from-violet-900/80 to-purple-900/80", icon: "work"    },
+  { placeholder: true, caption: "Sundarban Adventure",    location: "Khulna, BD",       date: "Nov 2024",  category: "travel",  color: "from-emerald-900/80 to-teal-900/80",  icon: "nature"  },
+  { placeholder: true, caption: "Tech Meetup Dhaka",      location: "Dhaka, BD",        date: "Oct 2024",  category: "events",  color: "from-blue-900/80 to-indigo-900/80",   icon: "events"  },
+  { placeholder: true, caption: "Workspace Setup",        location: "Home Office",      date: "Sep 2024",  category: "work",    color: "from-slate-800/80 to-gray-900/80",    icon: "work"    },
+  { placeholder: true, caption: "Morning Coffee Ritual",  location: "Dhaka, BD",        date: "Mar 2025",  category: "life",    color: "from-rose-900/80 to-pink-900/80",     icon: "life"    },
+  { placeholder: true, caption: "Sylhet Tea Gardens",     location: "Sylhet, BD",       date: "Aug 2024",  category: "travel",  color: "from-green-900/80 to-emerald-900/80", icon: "travel"  },
+  { placeholder: true, caption: "Birthday Celebration",   location: "Dhaka, BD",        date: "Jul 2024",  category: "events",  color: "from-fuchsia-900/80 to-pink-900/80",  icon: "events"  },
+  { placeholder: true, caption: "Rainy Day Vibes",        location: "Dhaka, BD",        date: "Jun 2024",  category: "life",    color: "from-cyan-900/80 to-blue-900/80",     icon: "nature"  },
+  { placeholder: true, caption: "Server Room Tour",       location: "Office, Dhaka",    date: "May 2024",  category: "work",    color: "from-zinc-800/80 to-slate-900/80",    icon: "work"    },
+  { placeholder: true, caption: "Hill Tracts Hiking",     location: "Rangamati, BD",    date: "Apr 2024",  category: "travel",  color: "from-lime-900/80 to-green-900/80",    icon: "travel"  },
+];
+
+// ════════════════════════════════════════════════════
+//  ICONS for placeholder cards
+// ════════════════════════════════════════════════════
+const iconSVG = {
+  travel: `<svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>`,
+  work:   `<svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>`,
+  events: `<svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0"/></svg>`,
+  life:   `<svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg>`,
+  nature: `<svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"/></svg>`,
+};
+
+// Category label map
+const catLabel = { travel:'Travel', work:'Work & Tech', events:'Events', life:'Life', nature:'Nature' };
+const catColors = {
+  travel: 'rgba(99,102,241,.3)',
+  work:   'rgba(56,189,248,.3)',
+  events: 'rgba(167,139,250,.3)',
+  life:   'rgba(244,63,94,.3)',
+  nature: 'rgba(52,211,153,.3)',
+};
+
+// ════════════════════════════════════════════════════
+//  Heights for placeholder cards (varied for masonry feel)
+// ════════════════════════════════════════════════════
+const heights = [220, 280, 240, 300, 260, 220, 280, 250, 300, 240, 260, 220];
+
+// ════════════════════════════════════════════════════
+//  Build gallery
+// ════════════════════════════════════════════════════
+const grid       = document.getElementById('gallery-grid');
+const emptyState = document.getElementById('empty-state');
+let currentFilter = 'all';
+let lightboxIndexes = []; // indexes in photos[] visible right now
+let lbCurrent = 0;
+
+function categoryColor(cat) {
+  return catColors[cat] || 'rgba(99,102,241,.3)';
+}
+
+function buildGrid(filter) {
+  grid.innerHTML = '';
+  lightboxIndexes = [];
+
+  const visible = photos.filter(p => filter === 'all' || p.category === filter);
+  document.getElementById('visible-count').textContent = visible.length + ' photo' + (visible.length !== 1 ? 's' : '');
+
+  if (visible.length === 0) {
+    emptyState.classList.remove('hidden');
+    return;
+  }
+  emptyState.classList.add('hidden');
+
+  photos.forEach((photo, globalIdx) => {
+    if (filter !== 'all' && photo.category !== filter) return;
+    const lbIdx = lightboxIndexes.length;
+    lightboxIndexes.push(globalIdx);
+
+    const item = document.createElement('div');
+    item.className = 'masonry-item reveal';
+    item.dataset.category = photo.category;
+    item.dataset.lbIdx = lbIdx;
+
+    if (photo.placeholder) {
+      const h = heights[globalIdx % heights.length];
+      item.innerHTML = `
+        <div class="photo-placeholder bg-gradient-to-br ${photo.color}" style="height:${h}px; position:relative; cursor:pointer;">
+          <div class="absolute inset-0 flex flex-col items-center justify-center gap-3 opacity-50">
+            ${iconSVG[photo.icon] || iconSVG.travel}
+            <span class="text-xs font-mono uppercase tracking-widest">Add your photo</span>
+          </div>
+          <div class="item-overlay">
+            <div class="caption space-y-1.5">
+              <span class="cat-badge">${catLabel[photo.category] || photo.category}</span>
+              <div class="text-white font-semibold text-sm">${photo.caption}</div>
+              <div class="text-gray-400 text-xs font-mono">${photo.location} · ${photo.date}</div>
+            </div>
+          </div>
+        </div>`;
+    } else {
+      item.innerHTML = `
+        <div style="position:relative; overflow:hidden;">
+          <img src="${photo.src}" alt="${photo.caption}" loading="lazy" class="w-full block" />
+          <div class="item-overlay">
+            <div class="caption space-y-1.5">
+              <span class="cat-badge">${catLabel[photo.category] || photo.category}</span>
+              <div class="text-white font-semibold text-sm">${photo.caption}</div>
+              <div class="text-gray-400 text-xs font-mono">${photo.location} · ${photo.date}</div>
+            </div>
+          </div>
+        </div>`;
+    }
+
+    item.addEventListener('click', () => openLightbox(parseInt(item.dataset.lbIdx)));
+    grid.appendChild(item);
+  });
+
+  // Trigger reveal
+  requestAnimationFrame(() => {
+    document.querySelectorAll('.masonry-item.reveal').forEach((el, i) => {
+      setTimeout(() => el.classList.add('visible'), i * 60);
+    });
+  });
+
+  // Update stats
+  updateStats();
+}
+
+function updateStats() {
+  const cats = new Set(photos.map(p => p.category));
+  animateCount('stat-photos', photos.length);
+  animateCount('stat-cats', cats.size);
+}
+
+function animateCount(id, target) {
+  const el = document.getElementById(id);
+  let n = 0;
+  const step = Math.ceil(target / 20);
+  const timer = setInterval(() => {
+    n = Math.min(n + step, target);
+    el.textContent = n;
+    if (n >= target) clearInterval(timer);
+  }, 40);
+}
+
+// ════════════════════════════════════════════════════
+//  Filter
+// ════════════════════════════════════════════════════
+document.querySelectorAll('.filter-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    currentFilter = btn.dataset.filter;
+    buildGrid(currentFilter);
+  });
+});
+
+
+// ════════════════════════════════════════════════════
+//  Lightbox
+// ════════════════════════════════════════════════════
+const lightbox   = document.getElementById('lightbox');
+const lbImg      = document.getElementById('lightbox-img');
+const lbCaption  = document.getElementById('lb-caption');
+const lbMeta     = document.getElementById('lb-meta');
+const lbCounter  = document.getElementById('lb-counter');
+
+function openLightbox(idx) {
+  lbCurrent = idx;
+  showPhoto(lbCurrent);
+  lightbox.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeLightbox() {
+  lightbox.classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+function showPhoto(idx) {
+  const photo = photos[lightboxIndexes[idx]];
+  lbImg.style.opacity = '0';
+
+  if (photo.placeholder) {
+    lbImg.src = '';
+    lbImg.alt = photo.caption;
+    // Show gradient placeholder in lightbox too
+    lbImg.style.display = 'none';
+    document.getElementById('lightbox-img-wrap').style.background = '';
+  } else {
+    lbImg.style.display = '';
+    lbImg.src = photo.src || photo.thumb || '';
+    lbImg.alt = photo.caption;
+    lbImg.onload = () => { lbImg.style.opacity = '1'; };
+  }
+
+  setTimeout(() => { lbImg.style.opacity = '1'; }, 50);
+  lbCaption.textContent = photo.caption;
+  lbMeta.textContent    = (photo.location ? photo.location + ' · ' : '') + (photo.date || '');
+  lbCounter.textContent = (idx + 1) + ' / ' + lightboxIndexes.length;
+}
+
+function prevPhoto() {
+  lbCurrent = (lbCurrent - 1 + lightboxIndexes.length) % lightboxIndexes.length;
+  showPhoto(lbCurrent);
+}
+function nextPhoto() {
+  lbCurrent = (lbCurrent + 1) % lightboxIndexes.length;
+  showPhoto(lbCurrent);
+}
+
+document.getElementById('lb-close').addEventListener('click', closeLightbox);
+document.getElementById('lb-prev').addEventListener('click', prevPhoto);
+document.getElementById('lb-next').addEventListener('click', nextPhoto);
+lightbox.addEventListener('click', e => { if (e.target === lightbox) closeLightbox(); });
+
+// Keyboard
+document.addEventListener('keydown', e => {
+  if (!lightbox.classList.contains('open')) return;
+  if (e.key === 'Escape')     closeLightbox();
+  if (e.key === 'ArrowLeft')  prevPhoto();
+  if (e.key === 'ArrowRight') nextPhoto();
+});
+
+// Touch swipe
+let touchStartX = 0;
+lightbox.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; }, { passive: true });
+lightbox.addEventListener('touchend', e => {
+  const dx = e.changedTouches[0].clientX - touchStartX;
+  if (Math.abs(dx) > 50) { dx < 0 ? nextPhoto() : prevPhoto(); }
+});
+
+
+// ════════════════════════════════════════════════════
+//  Navbar scroll
+// ════════════════════════════════════════════════════
+window.addEventListener('scroll', () => {
+  document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 50);
+});
+
+// Mobile menu
+const hamburger  = document.getElementById('hamburger');
+const mobileMenu = document.getElementById('mobile-menu');
+const iconOpen   = document.getElementById('icon-open');
+const iconClose  = document.getElementById('icon-close');
+let menuOpen = false;
+
+function toggleMenu(force) {
+  menuOpen = force !== undefined ? force : !menuOpen;
+  mobileMenu.classList.toggle('hidden', !menuOpen);
+  iconOpen.classList.toggle('hidden',  menuOpen);
+  iconClose.classList.toggle('hidden', !menuOpen);
+  document.body.style.overflow = menuOpen ? 'hidden' : '';
+}
+hamburger.addEventListener('click', () => toggleMenu());
+document.querySelectorAll('.mobile-nav').forEach(l => l.addEventListener('click', () => toggleMenu(false)));
+
+// Scroll reveal
+const revealObs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); revealObs.unobserve(e.target); }});
+}, { threshold: 0.1 });
+document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
+
+// Footer year
+document.getElementById('footer-year').textContent = new Date().getFullYear();
+
+// Init
+buildGrid('all');
+
+// Hero reveals
+window.addEventListener('load', () => {
+  document.querySelectorAll('section:first-of-type .reveal').forEach(el => el.classList.add('visible'));
+});
+</script>
+</body>
+</html>

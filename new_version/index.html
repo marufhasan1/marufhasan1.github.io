@@ -1,0 +1,1286 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MD. Maruf Hasan — Full-Stack Web Developer</title>
+  <meta name="description" content="MD. Maruf Hasan — Senior Full-Stack Web Developer specializing in PHP, Laravel, Vue.js, Nuxt.js, and ERP systems. Based in Dhaka, Bangladesh." />
+  <meta name="keywords" content="Full-Stack Developer, Laravel, Vue.js, Nuxt.js, PHP, ERP, Web Developer, Dhaka, Bangladesh" />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="MD. Maruf Hasan — Full-Stack Web Developer" />
+  <meta property="og:description" content="Senior Full-Stack Developer specializing in Laravel, Vue.js, and enterprise software." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://marufhasan.net/" />
+
+  <!-- Favicon -->
+  <link rel="icon" href="../favicon.ico" />
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace'],
+          },
+          colors: {
+            primary: {
+              50:  '#f0f4ff',
+              100: '#e0eaff',
+              200: '#c7d7fe',
+              300: '#a5b4fc',
+              400: '#818cf8',
+              500: '#6366f1',
+              600: '#4f46e5',
+              700: '#4338ca',
+              800: '#3730a3',
+              900: '#312e81',
+            },
+            surface: {
+              900: '#0b0f1a',
+              800: '#111827',
+              700: '#1f2937',
+              600: '#374151',
+            }
+          },
+          animation: {
+            'fade-up':    'fadeUp 0.6s ease forwards',
+            'fade-in':    'fadeIn 0.5s ease forwards',
+            'slide-left': 'slideLeft 0.6s ease forwards',
+            'slide-right':'slideRight 0.6s ease forwards',
+            'pulse-slow': 'pulse 3s ease-in-out infinite',
+            'float':      'float 6s ease-in-out infinite',
+            'typing':     'typing 3.5s steps(40,end), blink .75s step-end infinite',
+          },
+          keyframes: {
+            fadeUp:    { '0%':{ opacity:'0', transform:'translateY(30px)' }, '100%':{ opacity:'1', transform:'translateY(0)' } },
+            fadeIn:    { '0%':{ opacity:'0' }, '100%':{ opacity:'1' } },
+            slideLeft: { '0%':{ opacity:'0', transform:'translateX(-30px)' }, '100%':{ opacity:'1', transform:'translateX(0)' } },
+            slideRight:{ '0%':{ opacity:'0', transform:'translateX(30px)' }, '100%':{ opacity:'1', transform:'translateX(0)' } },
+            float:     { '0%,100%':{ transform:'translateY(0)' }, '50%':{ transform:'translateY(-10px)' } },
+            typing:    { from:{ width:'0' }, to:{ width:'100%' } },
+            blink:     { '0%,100%':{ borderColor:'transparent' }, '50%':{ borderColor:'#6366f1' } },
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* ── Global ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #0b0f1a;
+      color: #e2e8f0;
+      overflow-x: hidden;
+    }
+
+    /* ── Scrollbar ── */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: #111827; }
+    ::-webkit-scrollbar-thumb { background: #4f46e5; border-radius: 3px; }
+
+    /* ── Selection ── */
+    ::selection { background: #4f46e5; color: #fff; }
+
+    /* ── Gradient text utility ── */
+    .gradient-text {
+      background: linear-gradient(135deg, #818cf8 0%, #a78bfa 50%, #38bdf8 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    /* ── Gradient border card ── */
+    .card-glass {
+      background: rgba(31, 41, 55, 0.6);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(99, 102, 241, 0.15);
+      transition: border-color .3s, transform .3s, box-shadow .3s;
+    }
+    .card-glass:hover {
+      border-color: rgba(99, 102, 241, 0.5);
+      transform: translateY(-4px);
+      box-shadow: 0 20px 40px rgba(99, 102, 241, 0.15);
+    }
+
+    /* ── Nav ── */
+    #navbar {
+      transition: background .4s, box-shadow .4s;
+    }
+    #navbar.scrolled {
+      background: rgba(11, 15, 26, 0.95) !important;
+      backdrop-filter: blur(20px);
+      box-shadow: 0 1px 30px rgba(0,0,0,.5);
+    }
+    .nav-link {
+      position: relative;
+      transition: color .3s;
+    }
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: -2px; left: 0;
+      width: 0; height: 2px;
+      background: linear-gradient(90deg, #818cf8, #38bdf8);
+      border-radius: 1px;
+      transition: width .3s ease;
+    }
+    .nav-link:hover::after,
+    .nav-link.active::after { width: 100%; }
+    .nav-link.active { color: #818cf8; }
+
+    /* ── Hero background mesh ── */
+    .hero-mesh {
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse 80% 60% at 20% 40%, rgba(99,102,241,.18) 0%, transparent 60%),
+        radial-gradient(ellipse 60% 50% at 80% 60%, rgba(56,189,248,.12) 0%, transparent 60%),
+        radial-gradient(ellipse 50% 40% at 60% 10%, rgba(167,139,250,.10) 0%, transparent 55%);
+      z-index: 0;
+    }
+
+    /* ── Typing cursor ── */
+    .typing-cursor {
+      display: inline-block;
+      width: 3px; height: 1.1em;
+      background: #818cf8;
+      margin-left: 4px;
+      vertical-align: middle;
+      animation: blink .75s step-end infinite;
+    }
+    @keyframes blink { 0%,100%{ opacity:1 } 50%{ opacity:0 } }
+
+    /* ── Progress bar ── */
+    .skill-bar {
+      height: 4px;
+      border-radius: 2px;
+      background: rgba(99,102,241,.15);
+      overflow: hidden;
+    }
+    .skill-bar-fill {
+      height: 100%;
+      border-radius: 2px;
+      background: linear-gradient(90deg, #818cf8, #38bdf8);
+      width: 0;
+      transition: width 1.2s cubic-bezier(.4,0,.2,1);
+    }
+
+    /* ── Timeline ── */
+    .timeline-dot {
+      width: 14px; height: 14px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #818cf8, #38bdf8);
+      border: 3px solid #0b0f1a;
+      flex-shrink: 0;
+      box-shadow: 0 0 0 3px rgba(99,102,241,.3);
+    }
+    .timeline-line {
+      width: 2px;
+      background: linear-gradient(to bottom, rgba(99,102,241,.5), transparent);
+      flex-shrink: 0;
+    }
+
+    /* ── Skill tag ── */
+    .skill-tag {
+      display: inline-flex;
+      align-items: center;
+      padding: 4px 12px;
+      border-radius: 9999px;
+      font-size: 0.75rem;
+      font-weight: 500;
+      background: rgba(99,102,241,.12);
+      border: 1px solid rgba(99,102,241,.25);
+      color: #a5b4fc;
+      transition: background .25s, border-color .25s, transform .2s;
+      cursor: default;
+    }
+    .skill-tag:hover {
+      background: rgba(99,102,241,.25);
+      border-color: rgba(99,102,241,.5);
+      transform: translateY(-2px);
+    }
+
+    /* ── Project card ── */
+    .project-card {
+      position: relative;
+      overflow: hidden;
+    }
+    .project-card .overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(11,15,26,.95) 30%, transparent 100%);
+      opacity: 0;
+      transition: opacity .35s;
+    }
+    .project-card:hover .overlay { opacity: 1; }
+    .project-card .project-links {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      padding: 1.25rem;
+      transform: translateY(20px);
+      opacity: 0;
+      transition: transform .35s, opacity .35s;
+    }
+    .project-card:hover .project-links {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    /* ── Section reveal ── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(32px);
+      transition: opacity .7s ease, transform .7s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .reveal-delay-1 { transition-delay: .1s; }
+    .reveal-delay-2 { transition-delay: .2s; }
+    .reveal-delay-3 { transition-delay: .3s; }
+    .reveal-delay-4 { transition-delay: .4s; }
+    .reveal-delay-5 { transition-delay: .5s; }
+
+    /* ── Section title decoration ── */
+    .section-eyebrow {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .75rem;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: #818cf8;
+    }
+
+    /* ── Gradient button ── */
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: .5rem;
+      padding: .75rem 1.75rem;
+      border-radius: .75rem;
+      font-weight: 600;
+      font-size: .9rem;
+      background: linear-gradient(135deg, #6366f1, #4f46e5);
+      color: #fff;
+      border: 1px solid rgba(99,102,241,.4);
+      transition: box-shadow .3s, transform .2s, opacity .2s;
+      cursor: pointer;
+      text-decoration: none;
+    }
+    .btn-primary:hover {
+      box-shadow: 0 8px 30px rgba(99,102,241,.45);
+      transform: translateY(-2px);
+    }
+    .btn-outline {
+      display: inline-flex;
+      align-items: center;
+      gap: .5rem;
+      padding: .75rem 1.75rem;
+      border-radius: .75rem;
+      font-weight: 600;
+      font-size: .9rem;
+      background: transparent;
+      color: #a5b4fc;
+      border: 1px solid rgba(99,102,241,.35);
+      transition: border-color .3s, background .3s, transform .2s;
+      cursor: pointer;
+      text-decoration: none;
+    }
+    .btn-outline:hover {
+      border-color: rgba(99,102,241,.7);
+      background: rgba(99,102,241,.1);
+      transform: translateY(-2px);
+    }
+
+    /* ── Contact input ── */
+    .form-input {
+      width: 100%;
+      padding: .75rem 1rem;
+      border-radius: .75rem;
+      background: rgba(31,41,55,.7);
+      border: 1px solid rgba(99,102,241,.2);
+      color: #e2e8f0;
+      font-family: 'Inter', sans-serif;
+      font-size: .9rem;
+      transition: border-color .3s, box-shadow .3s;
+      outline: none;
+    }
+    .form-input:focus {
+      border-color: rgba(99,102,241,.6);
+      box-shadow: 0 0 0 3px rgba(99,102,241,.12);
+    }
+    .form-input::placeholder { color: #6b7280; }
+
+    /* ── Mobile menu ── */
+    #mobile-menu {
+      transition: transform .35s cubic-bezier(.4,0,.2,1), opacity .35s;
+    }
+    #mobile-menu.hidden { transform: translateX(100%); opacity: 0; pointer-events: none; }
+
+    /* ── Floating shapes ── */
+    .shape { position: absolute; border-radius: 50%; filter: blur(80px); pointer-events: none; z-index: 0; }
+
+    /* ── Print / minimal override ── */
+    @media print {
+      #navbar, #contact, footer { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════ NAVBAR ══ -->
+<header id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300">
+  <nav class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
+    <!-- Logo -->
+    <a href="#hero" class="flex items-center gap-2 group">
+      <span class="font-mono text-primary-400 text-lg font-bold group-hover:text-primary-300 transition-colors">&lt;MH /&gt;</span>
+    </a>
+
+    <!-- Desktop nav -->
+    <ul class="hidden md:flex items-center gap-8 text-sm font-medium">
+      <li><a href="#about"      class="nav-link text-gray-400 hover:text-white">About</a></li>
+      <li><a href="#skills"     class="nav-link text-gray-400 hover:text-white">Skills</a></li>
+      <li><a href="#experience" class="nav-link text-gray-400 hover:text-white">Experience</a></li>
+      <li><a href="#projects"   class="nav-link text-gray-400 hover:text-white">Projects</a></li>
+      <li><a href="gallery.html" class="nav-link text-gray-400 hover:text-white">Gallery</a></li>
+      <li><a href="#contact"    class="nav-link text-gray-400 hover:text-white">Contact</a></li>
+    </ul>
+
+    <!-- CTA -->
+    <div class="hidden md:flex items-center gap-3">
+      <a href="../cv.pdf" target="_blank" class="btn-outline text-sm py-2 px-4">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+        Resume
+      </a>
+    </div>
+
+    <!-- Hamburger -->
+    <button id="hamburger" class="md:hidden p-2 rounded-lg text-gray-400 hover:text-white hover:bg-white/5 transition" aria-label="Menu">
+      <svg id="icon-open"  class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+      <svg id="icon-close" class="w-6 h-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+    </button>
+  </nav>
+
+  <!-- Mobile menu -->
+  <div id="mobile-menu" class="hidden fixed inset-0 top-[69px] bg-surface-900/98 backdrop-blur-xl z-40 flex flex-col items-center justify-center gap-8 md:hidden">
+    <a href="#about"      class="text-2xl font-semibold text-gray-300 hover:text-white mobile-nav">About</a>
+    <a href="#skills"     class="text-2xl font-semibold text-gray-300 hover:text-white mobile-nav">Skills</a>
+    <a href="#experience" class="text-2xl font-semibold text-gray-300 hover:text-white mobile-nav">Experience</a>
+    <a href="#projects"   class="text-2xl font-semibold text-gray-300 hover:text-white mobile-nav">Projects</a>
+    <a href="gallery.html" class="text-2xl font-semibold text-gray-300 hover:text-white mobile-nav">Gallery</a>
+    <a href="#contact"    class="text-2xl font-semibold text-gray-300 hover:text-white mobile-nav">Contact</a>
+    <a href="../cv.pdf" target="_blank" class="btn-primary mt-4">Download Resume</a>
+  </div>
+</header>
+
+
+<!-- ═══════════════════════════════════════════ HERO ══ -->
+<section id="hero" class="relative min-h-screen flex items-center justify-center overflow-hidden">
+  <!-- Background -->
+  <div class="hero-mesh"></div>
+  <div class="shape w-96 h-96 bg-primary-500/10 top-20 -left-32"></div>
+  <div class="shape w-80 h-80 bg-sky-500/8 bottom-20 -right-20"></div>
+
+  <div class="relative z-10 max-w-6xl mx-auto px-6 py-24 grid lg:grid-cols-2 gap-16 items-center">
+    <!-- Text -->
+    <div class="space-y-6">
+      <div class="reveal">
+        <span class="section-eyebrow">Hello, I'm</span>
+      </div>
+      <h1 class="reveal reveal-delay-1 text-4xl sm:text-5xl lg:text-6xl font-black leading-tight">
+        MD. Maruf<br/>
+        <span class="gradient-text">Hasan</span>
+      </h1>
+      <div class="reveal reveal-delay-2 text-xl sm:text-2xl font-medium text-gray-300 min-h-[2rem]">
+        <span id="typed-text"></span><span class="typing-cursor"></span>
+      </div>
+      <p class="reveal reveal-delay-3 text-gray-400 text-base leading-relaxed max-w-lg">
+        Senior full-stack developer building robust enterprise software, ERP systems, and scalable web applications. Passionate about clean architecture and developer experience.
+      </p>
+      <div class="reveal reveal-delay-4 flex flex-wrap gap-4 pt-2">
+        <a href="#projects" class="btn-primary">
+          View My Work
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+        </a>
+        <a href="#contact" class="btn-outline">Let's Talk</a>
+      </div>
+      <!-- Social -->
+      <div class="reveal reveal-delay-5 flex items-center gap-5 pt-2">
+        <a href="https://github.com/marufhasan1" target="_blank" class="text-gray-500 hover:text-white transition-colors" aria-label="GitHub">
+          <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 .5C5.648.5.5 5.648.5 12c0 5.084 3.292 9.386 7.863 10.908.575.107.783-.248.783-.552v-1.93C5.96 21.02 5.28 18.9 5.28 18.9c-.522-1.327-1.275-1.68-1.275-1.68-1.042-.712.08-.698.08-.698 1.153.081 1.76 1.185 1.76 1.185 1.024 1.754 2.687 1.248 3.343.954.104-.742.4-1.248.728-1.535-2.553-.29-5.237-1.276-5.237-5.678 0-1.254.448-2.279 1.184-3.084-.119-.291-.514-1.46.112-3.043 0 0 .966-.309 3.165 1.18.917-.255 1.9-.382 2.876-.387.976.005 1.96.132 2.877.387 2.197-1.489 3.162-1.18 3.162-1.18.628 1.583.233 2.752.114 3.043.738.805 1.183 1.83 1.183 3.084 0 4.413-2.688 5.385-5.25 5.668.414.355.782 1.057.782 2.13v3.162c0 .307.207.665.79.551C20.71 21.383 24 17.082 24 12c0-6.352-5.148-11.5-12-11.5z"/></svg>
+        </a>
+        <a href="https://linkedin.com/in/emarufhasan" target="_blank" class="text-gray-500 hover:text-white transition-colors" aria-label="LinkedIn">
+          <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+        </a>
+        <a href="https://facebook.com/emarufhasan" target="_blank" class="text-gray-500 hover:text-white transition-colors" aria-label="Facebook">
+          <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+        </a>
+        <span class="w-px h-5 bg-gray-700"></span>
+        <a href="mailto:emarufhasan@gmail.com" class="text-gray-500 hover:text-white transition-colors text-sm font-mono">
+          emarufhasan@gmail.com
+        </a>
+      </div>
+    </div>
+
+    <!-- Avatar card -->
+    <div class="hidden lg:flex justify-center items-center">
+      <div class="relative">
+        <!-- Glow ring -->
+        <div class="absolute -inset-4 rounded-full bg-gradient-to-tr from-primary-600/30 to-sky-500/20 blur-2xl animate-pulse-slow"></div>
+        <!-- Avatar container -->
+        <div class="relative w-72 h-72 rounded-full border-2 border-primary-500/30 overflow-hidden shadow-2xl">
+          <img src="../assets/img_avatar.png" alt="MD. Maruf Hasan" class="w-full h-full object-cover" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjg4IiBoZWlnaHQ9IjI4OCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMjg4IiBoZWlnaHQ9IjI4OCIgZmlsbD0iIzFmMjkzNyIvPjxjaXJjbGUgY3g9IjE0NCIgY3k9IjExMCIgcj0iNTAiIGZpbGw9IiM0ZjQ2ZTUiIG9wYWNpdHk9Ii42Ii8+PHJlY3QgeD0iNjQiIHk9IjE4OCIgd2lkdGg9IjE2MCIgaGVpZ2h0PSIxMDAiIHJ4PSI4MCIgZmlsbD0iIzRmNDZlNSIgb3BhY2l0eT0iLjQiLz48L3N2Zz4='" />
+        </div>
+        <!-- Floating badge -->
+        <div class="absolute -bottom-3 left-1/2 -translate-x-1/2 bg-surface-700 border border-primary-500/30 rounded-full px-5 py-2 flex items-center gap-2 shadow-xl whitespace-nowrap">
+          <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+          <span class="text-sm font-medium text-gray-300">Available for work</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scroll indicator -->
+  <div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-gray-600 text-xs animate-bounce">
+    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════ ABOUT ══ -->
+<section id="about" class="relative py-28 overflow-hidden">
+  <div class="max-w-6xl mx-auto px-6">
+    <div class="grid lg:grid-cols-2 gap-16 items-center">
+      <!-- Stats / highlights -->
+      <div class="reveal order-2 lg:order-1 grid grid-cols-2 gap-5">
+        <div class="card-glass rounded-2xl p-7 col-span-2 sm:col-span-1">
+          <div class="text-4xl font-black gradient-text mb-1">6+</div>
+          <div class="text-gray-400 text-sm">Years of experience</div>
+        </div>
+        <div class="card-glass rounded-2xl p-7 col-span-2 sm:col-span-1">
+          <div class="text-4xl font-black gradient-text mb-1">20+</div>
+          <div class="text-gray-400 text-sm">Projects delivered</div>
+        </div>
+        <div class="card-glass rounded-2xl p-7 col-span-2">
+          <div class="flex items-start gap-4">
+            <div class="w-11 h-11 rounded-xl bg-primary-500/15 flex items-center justify-center flex-shrink-0 mt-1">
+              <svg class="w-5 h-5 text-primary-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+            </div>
+            <div>
+              <div class="text-white font-semibold mb-1">Dhaka, Bangladesh</div>
+              <div class="text-gray-400 text-sm">Open to remote worldwide</div>
+            </div>
+          </div>
+        </div>
+        <div class="card-glass rounded-2xl p-7 col-span-2">
+          <div class="flex items-center gap-3 mb-3">
+            <div class="w-2 h-2 rounded-full bg-emerald-400"></div>
+            <span class="text-sm font-medium text-gray-300">Currently at Quality Feeds Limited</span>
+          </div>
+          <div class="text-gray-400 text-sm leading-relaxed">Building enterprise ERP software from scratch — architecture, dev, and DevOps.</div>
+        </div>
+      </div>
+
+      <!-- Text -->
+      <div class="reveal reveal-delay-2 order-1 lg:order-2 space-y-6">
+        <div>
+          <span class="section-eyebrow">Get to know me</span>
+          <h2 class="mt-3 text-3xl sm:text-4xl font-bold text-white">About Me</h2>
+        </div>
+        <p class="text-gray-400 leading-relaxed">
+          I'm a <strong class="text-gray-200">Senior Full-Stack Web Developer</strong> with over 6 years of hands-on experience building enterprise-grade applications, ERP systems, and high-traffic web platforms. I specialize in <strong class="text-gray-200">PHP / Laravel</strong> on the back end and <strong class="text-gray-200">Vue.js / Nuxt.js</strong> on the front end.
+        </p>
+        <p class="text-gray-400 leading-relaxed">
+          Beyond code, I enjoy the full product lifecycle — from studying business processes and designing databases to setting up CI/CD pipelines and managing Ubuntu production servers with Docker.
+        </p>
+        <p class="text-gray-400 leading-relaxed">
+          I hold a degree from <strong class="text-gray-200">Bangladesh University of Professionals (BUP)</strong> and am passionate about writing clean, maintainable, and well-architected software.
+        </p>
+        <div class="flex flex-wrap gap-3 pt-2">
+          <a href="mailto:emarufhasan@gmail.com" class="btn-primary">Hire Me</a>
+          <a href="../cv.pdf" target="_blank" class="btn-outline">Download CV</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════ SKILLS ══ -->
+<section id="skills" class="relative py-28 bg-surface-800/40">
+  <div class="max-w-6xl mx-auto px-6">
+    <div class="text-center mb-16 reveal">
+      <span class="section-eyebrow">What I work with</span>
+      <h2 class="mt-3 text-3xl sm:text-4xl font-bold text-white">Skills & Technologies</h2>
+    </div>
+
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+      <!-- Frontend -->
+      <div class="reveal reveal-delay-1 card-glass rounded-2xl p-7 space-y-5">
+        <div class="flex items-center gap-3 mb-2">
+          <div class="w-10 h-10 rounded-xl bg-primary-500/15 flex items-center justify-center">
+            <svg class="w-5 h-5 text-primary-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+          </div>
+          <h3 class="text-white font-semibold">Frontend</h3>
+        </div>
+        <div class="space-y-4">
+          <div>
+            <div class="flex justify-between text-sm mb-1.5"><span class="text-gray-300">Vue.js / Nuxt.js</span><span class="text-primary-400 font-mono">92%</span></div>
+            <div class="skill-bar"><div class="skill-bar-fill" data-width="92"></div></div>
+          </div>
+          <div>
+            <div class="flex justify-between text-sm mb-1.5"><span class="text-gray-300">JavaScript / ES6+</span><span class="text-primary-400 font-mono">90%</span></div>
+            <div class="skill-bar"><div class="skill-bar-fill" data-width="90"></div></div>
+          </div>
+          <div>
+            <div class="flex justify-between text-sm mb-1.5"><span class="text-gray-300">HTML5 / CSS3</span><span class="text-primary-400 font-mono">95%</span></div>
+            <div class="skill-bar"><div class="skill-bar-fill" data-width="95"></div></div>
+          </div>
+          <div>
+            <div class="flex justify-between text-sm mb-1.5"><span class="text-gray-300">Tailwind CSS</span><span class="text-primary-400 font-mono">90%</span></div>
+            <div class="skill-bar"><div class="skill-bar-fill" data-width="90"></div></div>
+          </div>
+          <div>
+            <div class="flex justify-between text-sm mb-1.5"><span class="text-gray-300">Angular JS</span><span class="text-primary-400 font-mono">75%</span></div>
+            <div class="skill-bar"><div class="skill-bar-fill" data-width="75"></div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Backend -->
+      <div class="reveal reveal-delay-2 card-glass rounded-2xl p-7 space-y-5">
+        <div class="flex items-center gap-3 mb-2">
+          <div class="w-10 h-10 rounded-xl bg-sky-500/15 flex items-center justify-center">
+            <svg class="w-5 h-5 text-sky-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14M5 12a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v4a2 2 0 01-2 2M5 12a2 2 0 00-2 2v4a2 2 0 002 2h14a2 2 0 002-2v-4a2 2 0 00-2-2"/></svg>
+          </div>
+          <h3 class="text-white font-semibold">Backend</h3>
+        </div>
+        <div class="space-y-4">
+          <div>
+            <div class="flex justify-between text-sm mb-1.5"><span class="text-gray-300">PHP / Laravel</span><span class="text-sky-400 font-mono">95%</span></div>
+            <div class="skill-bar"><div class="skill-bar-fill" data-width="95" style="background: linear-gradient(90deg, #38bdf8, #0ea5e9)"></div></div>
+          </div>
+          <div>
+            <div class="flex justify-between text-sm mb-1.5"><span class="text-gray-300">RESTful API</span><span class="text-sky-400 font-mono">92%</span></div>
+            <div class="skill-bar"><div class="skill-bar-fill" data-width="92" style="background: linear-gradient(90deg, #38bdf8, #0ea5e9)"></div></div>
+          </div>
+          <div>
+            <div class="flex justify-between text-sm mb-1.5"><span class="text-gray-300">MySQL</span><span class="text-sky-400 font-mono">90%</span></div>
+            <div class="skill-bar"><div class="skill-bar-fill" data-width="90" style="background: linear-gradient(90deg, #38bdf8, #0ea5e9)"></div></div>
+          </div>
+          <div>
+            <div class="flex justify-between text-sm mb-1.5"><span class="text-gray-300">Inertia.js</span><span class="text-sky-400 font-mono">85%</span></div>
+            <div class="skill-bar"><div class="skill-bar-fill" data-width="85" style="background: linear-gradient(90deg, #38bdf8, #0ea5e9)"></div></div>
+          </div>
+          <div>
+            <div class="flex justify-between text-sm mb-1.5"><span class="text-gray-300">Python / Java</span><span class="text-sky-400 font-mono">65%</span></div>
+            <div class="skill-bar"><div class="skill-bar-fill" data-width="65" style="background: linear-gradient(90deg, #38bdf8, #0ea5e9)"></div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- DevOps & Tools -->
+      <div class="reveal reveal-delay-3 card-glass rounded-2xl p-7 space-y-5">
+        <div class="flex items-center gap-3 mb-2">
+          <div class="w-10 h-10 rounded-xl bg-emerald-500/15 flex items-center justify-center">
+            <svg class="w-5 h-5 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+          </div>
+          <h3 class="text-white font-semibold">DevOps & Tools</h3>
+        </div>
+        <div class="space-y-4">
+          <div>
+            <div class="flex justify-between text-sm mb-1.5"><span class="text-gray-300">Docker</span><span class="text-emerald-400 font-mono">85%</span></div>
+            <div class="skill-bar"><div class="skill-bar-fill" data-width="85" style="background: linear-gradient(90deg, #34d399, #10b981)"></div></div>
+          </div>
+          <div>
+            <div class="flex justify-between text-sm mb-1.5"><span class="text-gray-300">Linux / Ubuntu Server</span><span class="text-emerald-400 font-mono">88%</span></div>
+            <div class="skill-bar"><div class="skill-bar-fill" data-width="88" style="background: linear-gradient(90deg, #34d399, #10b981)"></div></div>
+          </div>
+          <div>
+            <div class="flex justify-between text-sm mb-1.5"><span class="text-gray-300">CI/CD Pipelines</span><span class="text-emerald-400 font-mono">80%</span></div>
+            <div class="skill-bar"><div class="skill-bar-fill" data-width="80" style="background: linear-gradient(90deg, #34d399, #10b981)"></div></div>
+          </div>
+          <div>
+            <div class="flex justify-between text-sm mb-1.5"><span class="text-gray-300">Git</span><span class="text-emerald-400 font-mono">92%</span></div>
+            <div class="skill-bar"><div class="skill-bar-fill" data-width="92" style="background: linear-gradient(90deg, #34d399, #10b981)"></div></div>
+          </div>
+          <div>
+            <div class="flex justify-between text-sm mb-1.5"><span class="text-gray-300">Firebase</span><span class="text-emerald-400 font-mono">75%</span></div>
+            <div class="skill-bar"><div class="skill-bar-fill" data-width="75" style="background: linear-gradient(90deg, #34d399, #10b981)"></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tech tags -->
+    <div class="reveal reveal-delay-2 mt-10 card-glass rounded-2xl p-8">
+      <h3 class="text-sm font-semibold text-gray-400 mb-5 uppercase tracking-widest">Full technology stack</h3>
+      <div class="flex flex-wrap gap-2.5">
+        <span class="skill-tag">PHP</span>
+        <span class="skill-tag">Laravel</span>
+        <span class="skill-tag">Vue.js</span>
+        <span class="skill-tag">Nuxt.js</span>
+        <span class="skill-tag">Inertia.js</span>
+        <span class="skill-tag">JavaScript</span>
+        <span class="skill-tag">TypeScript</span>
+        <span class="skill-tag">HTML5</span>
+        <span class="skill-tag">CSS3</span>
+        <span class="skill-tag">Tailwind CSS</span>
+        <span class="skill-tag">Bootstrap</span>
+        <span class="skill-tag">Angular JS</span>
+        <span class="skill-tag">jQuery</span>
+        <span class="skill-tag">Pinia</span>
+        <span class="skill-tag">Vuex</span>
+        <span class="skill-tag">Vite</span>
+        <span class="skill-tag">MySQL</span>
+        <span class="skill-tag">RESTful API</span>
+        <span class="skill-tag">Docker</span>
+        <span class="skill-tag">CI/CD</span>
+        <span class="skill-tag">Linux</span>
+        <span class="skill-tag">Ubuntu Server</span>
+        <span class="skill-tag">Git</span>
+        <span class="skill-tag">Firebase</span>
+        <span class="skill-tag">Google Maps API</span>
+        <span class="skill-tag">Payment Gateways</span>
+        <span class="skill-tag">Pusher</span>
+        <span class="skill-tag">Google Analytics</span>
+        <span class="skill-tag">Python</span>
+        <span class="skill-tag">Java</span>
+        <span class="skill-tag">Kotlin</span>
+        <span class="skill-tag">C#</span>
+        <span class="skill-tag">Arduino / IoT</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════ EXPERIENCE ══ -->
+<section id="experience" class="relative py-28 overflow-hidden">
+  <div class="max-w-6xl mx-auto px-6">
+    <div class="text-center mb-16 reveal">
+      <span class="section-eyebrow">My Journey</span>
+      <h2 class="mt-3 text-3xl sm:text-4xl font-bold text-white">Experience & Education</h2>
+    </div>
+
+    <div class="grid lg:grid-cols-2 gap-12">
+
+      <!-- Work experience -->
+      <div class="reveal reveal-delay-1">
+        <h3 class="text-lg font-semibold text-white mb-8 flex items-center gap-3">
+          <div class="w-8 h-8 rounded-lg bg-primary-500/15 flex items-center justify-center">
+            <svg class="w-4 h-4 text-primary-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+          </div>
+          Work Experience
+        </h3>
+
+        <div class="space-y-6">
+
+          <!-- Job 1 -->
+          <div class="flex gap-4">
+            <div class="flex flex-col items-center pt-1">
+              <div class="timeline-dot"></div>
+              <div class="timeline-line flex-1 mt-2"></div>
+            </div>
+            <div class="card-glass rounded-2xl p-6 flex-1 mb-2">
+              <div class="flex items-start justify-between gap-3 flex-wrap mb-3">
+                <div>
+                  <h4 class="text-white font-semibold">Sr. Officer — Software Engineering</h4>
+                  <div class="text-primary-400 text-sm font-medium mt-0.5">Quality Feeds Limited</div>
+                </div>
+                <span class="text-xs font-mono bg-primary-500/10 text-primary-400 px-3 py-1 rounded-full border border-primary-500/20 whitespace-nowrap">2022 — Present</span>
+              </div>
+              <p class="text-gray-400 text-sm leading-relaxed mb-4">Building a comprehensive ERP system from scratch — covering business process analysis, software architecture, full-stack development, and managing Ubuntu production servers.</p>
+              <div class="flex flex-wrap gap-2">
+                <span class="skill-tag text-xs">Laravel</span>
+                <span class="skill-tag text-xs">Vue.js</span>
+                <span class="skill-tag text-xs">Nuxt.js</span>
+                <span class="skill-tag text-xs">Docker</span>
+                <span class="skill-tag text-xs">CI/CD</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Job 2 -->
+          <div class="flex gap-4">
+            <div class="flex flex-col items-center pt-1">
+              <div class="timeline-dot"></div>
+              <div class="timeline-line flex-1 mt-2"></div>
+            </div>
+            <div class="card-glass rounded-2xl p-6 flex-1 mb-2">
+              <div class="flex items-start justify-between gap-3 flex-wrap mb-3">
+                <div>
+                  <h4 class="text-white font-semibold">Sr. Software Engineer</h4>
+                  <div class="text-primary-400 text-sm font-medium mt-0.5">MononSoft Limited</div>
+                </div>
+                <span class="text-xs font-mono bg-primary-500/10 text-primary-400 px-3 py-1 rounded-full border border-primary-500/20 whitespace-nowrap">2020 — 2022</span>
+              </div>
+              <p class="text-gray-400 text-sm leading-relaxed mb-4">Led development of JERP — a customized enterprise resource planning system for JMI Group's strategic business units, handling complex multi-module integrations.</p>
+              <div class="flex flex-wrap gap-2">
+                <span class="skill-tag text-xs">Laravel</span>
+                <span class="skill-tag text-xs">Vue.js</span>
+                <span class="skill-tag text-xs">MySQL</span>
+                <span class="skill-tag text-xs">REST API</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Job 3 -->
+          <div class="flex gap-4">
+            <div class="flex flex-col items-center pt-1">
+              <div class="timeline-dot"></div>
+            </div>
+            <div class="card-glass rounded-2xl p-6 flex-1 mb-2">
+              <div class="flex items-start justify-between gap-3 flex-wrap mb-3">
+                <div>
+                  <h4 class="text-white font-semibold">Full-Stack Web Developer</h4>
+                  <div class="text-primary-400 text-sm font-medium mt-0.5">Various Clients & Startups</div>
+                </div>
+                <span class="text-xs font-mono bg-primary-500/10 text-primary-400 px-3 py-1 rounded-full border border-primary-500/20 whitespace-nowrap">2017 — 2020</span>
+              </div>
+              <p class="text-gray-400 text-sm leading-relaxed mb-4">Developed e-commerce platforms, classified ad sites, and food delivery applications for clients in Bangladesh and the USA using Laravel and Angular JS.</p>
+              <div class="flex flex-wrap gap-2">
+                <span class="skill-tag text-xs">Laravel</span>
+                <span class="skill-tag text-xs">Angular JS</span>
+                <span class="skill-tag text-xs">jQuery</span>
+                <span class="skill-tag text-xs">MySQL</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Education -->
+      <div class="reveal reveal-delay-2">
+        <h3 class="text-lg font-semibold text-white mb-8 flex items-center gap-3">
+          <div class="w-8 h-8 rounded-lg bg-sky-500/15 flex items-center justify-center">
+            <svg class="w-4 h-4 text-sky-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M12 14l9-5-9-5-9 5 9 5z"/><path d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14zm-4 6v-7.5l4-2.222"/></svg>
+          </div>
+          Education
+        </h3>
+
+        <div class="space-y-6">
+          <div class="flex gap-4">
+            <div class="flex flex-col items-center pt-1">
+              <div class="timeline-dot" style="background: linear-gradient(135deg, #38bdf8, #0ea5e9);"></div>
+              <div class="timeline-line flex-1 mt-2"></div>
+            </div>
+            <div class="card-glass rounded-2xl p-6 flex-1 mb-2">
+              <div class="flex items-start justify-between gap-3 flex-wrap mb-2">
+                <div>
+                  <h4 class="text-white font-semibold">Master's Degree</h4>
+                  <div class="text-sky-400 text-sm font-medium mt-0.5">Bangladesh University of Professionals (BUP)</div>
+                </div>
+                <span class="text-xs font-mono bg-sky-500/10 text-sky-400 px-3 py-1 rounded-full border border-sky-500/20 whitespace-nowrap">2021 — 2023</span>
+              </div>
+              <p class="text-gray-400 text-sm leading-relaxed">Advanced study of software engineering, system design, and computer science theory at one of Bangladesh's premier universities.</p>
+            </div>
+          </div>
+
+          <div class="flex gap-4">
+            <div class="flex flex-col items-center pt-1">
+              <div class="timeline-dot" style="background: linear-gradient(135deg, #38bdf8, #0ea5e9);"></div>
+            </div>
+            <div class="card-glass rounded-2xl p-6 flex-1 mb-2">
+              <div class="flex items-start justify-between gap-3 flex-wrap mb-2">
+                <div>
+                  <h4 class="text-white font-semibold">Bachelor's Degree</h4>
+                  <div class="text-sky-400 text-sm font-medium mt-0.5">Bangladesh University</div>
+                </div>
+                <span class="text-xs font-mono bg-sky-500/10 text-sky-400 px-3 py-1 rounded-full border border-sky-500/20 whitespace-nowrap">2016 — 2020</span>
+              </div>
+              <p class="text-gray-400 text-sm leading-relaxed">Foundation in computer science and engineering, with strong focus on software development, data structures, and algorithms.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Soft skills / highlights -->
+        <div class="mt-8 card-glass rounded-2xl p-6 space-y-4">
+          <h4 class="text-white font-semibold text-sm uppercase tracking-widest">Core Strengths</h4>
+          <div class="grid grid-cols-2 gap-3 text-sm text-gray-400">
+            <div class="flex items-center gap-2"><span class="text-primary-400">✓</span> System Architecture</div>
+            <div class="flex items-center gap-2"><span class="text-primary-400">✓</span> Database Design</div>
+            <div class="flex items-center gap-2"><span class="text-primary-400">✓</span> API Development</div>
+            <div class="flex items-center gap-2"><span class="text-primary-400">✓</span> DevOps / Servers</div>
+            <div class="flex items-center gap-2"><span class="text-primary-400">✓</span> Team Leadership</div>
+            <div class="flex items-center gap-2"><span class="text-primary-400">✓</span> Business Analysis</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════ PROJECTS ══ -->
+<section id="projects" class="relative py-28 bg-surface-800/40">
+  <div class="max-w-6xl mx-auto px-6">
+    <div class="text-center mb-16 reveal">
+      <span class="section-eyebrow">What I've built</span>
+      <h2 class="mt-3 text-3xl sm:text-4xl font-bold text-white">Featured Projects</h2>
+      <p class="mt-4 text-gray-400 max-w-lg mx-auto">A selection of enterprise solutions, web applications, and platforms I've designed and built.</p>
+    </div>
+
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+      <!-- Project 1: ERP Quality Feeds -->
+      <div class="reveal reveal-delay-1 card-glass rounded-2xl overflow-hidden group">
+        <div class="relative h-48 bg-gradient-to-br from-primary-900/60 to-surface-700 flex items-center justify-center">
+          <div class="text-center space-y-2">
+            <div class="w-16 h-16 mx-auto rounded-2xl bg-primary-500/20 border border-primary-500/30 flex items-center justify-center">
+              <svg class="w-8 h-8 text-primary-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg>
+            </div>
+            <span class="text-xs text-primary-400 font-mono">Enterprise ERP</span>
+          </div>
+        </div>
+        <div class="p-6 space-y-4">
+          <div>
+            <span class="text-xs font-mono text-primary-400 bg-primary-500/10 px-2.5 py-1 rounded-full border border-primary-500/20">Current</span>
+            <h3 class="text-white font-semibold text-lg mt-3">Quality Feeds ERP</h3>
+            <p class="text-gray-400 text-sm leading-relaxed mt-2">Comprehensive ERP system built from scratch covering Sales, Production, Procurement, and HR modules for a large manufacturing company.</p>
+          </div>
+          <div class="flex flex-wrap gap-1.5">
+            <span class="skill-tag text-xs">Laravel</span>
+            <span class="skill-tag text-xs">Vue.js</span>
+            <span class="skill-tag text-xs">Nuxt.js</span>
+            <span class="skill-tag text-xs">Inertia.js</span>
+            <span class="skill-tag text-xs">Docker</span>
+            <span class="skill-tag text-xs">MySQL</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Project 2: JERP -->
+      <div class="reveal reveal-delay-2 card-glass rounded-2xl overflow-hidden group">
+        <div class="relative h-48 bg-gradient-to-br from-sky-900/60 to-surface-700 flex items-center justify-center">
+          <div class="text-center space-y-2">
+            <div class="w-16 h-16 mx-auto rounded-2xl bg-sky-500/20 border border-sky-500/30 flex items-center justify-center">
+              <svg class="w-8 h-8 text-sky-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 3H5a2 2 0 00-2 2v4m6-6h10a2 2 0 012 2v4M9 3v18m0 0h10a2 2 0 002-2V9M9 21H5a2 2 0 01-2-2V9m0 0h18"/></svg>
+            </div>
+            <span class="text-xs text-sky-400 font-mono">Enterprise ERP</span>
+          </div>
+        </div>
+        <div class="p-6 space-y-4">
+          <div>
+            <span class="text-xs font-mono text-sky-400 bg-sky-500/10 px-2.5 py-1 rounded-full border border-sky-500/20">MononSoft</span>
+            <h3 class="text-white font-semibold text-lg mt-3">JERP — JMI Group ERP</h3>
+            <p class="text-gray-400 text-sm leading-relaxed mt-2">Customized ERP for JMI Group's strategic business units. Multi-module system handling finance, inventory, HR, and reporting across multiple companies.</p>
+          </div>
+          <div class="flex flex-wrap gap-1.5">
+            <span class="skill-tag text-xs">Laravel</span>
+            <span class="skill-tag text-xs">Vue.js</span>
+            <span class="skill-tag text-xs">MySQL</span>
+            <span class="skill-tag text-xs">Bootstrap</span>
+            <span class="skill-tag text-xs">REST API</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Project 3: Biggapti -->
+      <div class="reveal reveal-delay-3 card-glass rounded-2xl overflow-hidden group">
+        <div class="relative h-48 bg-gradient-to-br from-violet-900/60 to-surface-700 flex items-center justify-center">
+          <div class="text-center space-y-2">
+            <div class="w-16 h-16 mx-auto rounded-2xl bg-violet-500/20 border border-violet-500/30 flex items-center justify-center">
+              <svg class="w-8 h-8 text-violet-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M11 5.882V19.24a1.76 1.76 0 01-3.417.592l-2.147-6.15M18 13a3 3 0 100-6M5.436 13.683A4.001 4.001 0 017 6h1.832c4.1 0 7.625-1.234 9.168-3v14c-1.543-1.766-5.067-3-9.168-3H7a3.988 3.988 0 01-1.564-.317z"/></svg>
+            </div>
+            <span class="text-xs text-violet-400 font-mono">Classified Ads</span>
+          </div>
+        </div>
+        <div class="p-6 space-y-4">
+          <div>
+            <a href="http://biggapti.com/" target="_blank" class="text-xs font-mono text-violet-400 bg-violet-500/10 px-2.5 py-1 rounded-full border border-violet-500/20 hover:bg-violet-500/20 transition">biggapti.com ↗</a>
+            <h3 class="text-white font-semibold text-lg mt-3">Biggapti.com</h3>
+            <p class="text-gray-400 text-sm leading-relaxed mt-2">Full-featured Bangladeshi classified ads platform — jobs, housing, items, services, forums, store, and live chat with Android app integration.</p>
+          </div>
+          <div class="flex flex-wrap gap-1.5">
+            <span class="skill-tag text-xs">Laravel</span>
+            <span class="skill-tag text-xs">Vue.js</span>
+            <span class="skill-tag text-xs">Android</span>
+            <span class="skill-tag text-xs">Firebase</span>
+            <span class="skill-tag text-xs">REST API</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Project 4: HalalDish24 -->
+      <div class="reveal reveal-delay-1 card-glass rounded-2xl overflow-hidden group">
+        <div class="relative h-48 bg-gradient-to-br from-emerald-900/60 to-surface-700 flex items-center justify-center">
+          <div class="text-center space-y-2">
+            <div class="w-16 h-16 mx-auto rounded-2xl bg-emerald-500/20 border border-emerald-500/30 flex items-center justify-center">
+              <svg class="w-8 h-8 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
+            </div>
+            <span class="text-xs text-emerald-400 font-mono">Food Delivery</span>
+          </div>
+        </div>
+        <div class="p-6 space-y-4">
+          <div>
+            <a href="https://halaldish24.com/" target="_blank" class="text-xs font-mono text-emerald-400 bg-emerald-500/10 px-2.5 py-1 rounded-full border border-emerald-500/20 hover:bg-emerald-500/20 transition">halaldish24.com ↗</a>
+            <h3 class="text-white font-semibold text-lg mt-3">HalalDish24</h3>
+            <p class="text-gray-400 text-sm leading-relaxed mt-2">Online halal food delivery platform for the USA market — restaurant management, real-time order tracking, delivery dispatch, and payment processing.</p>
+          </div>
+          <div class="flex flex-wrap gap-1.5">
+            <span class="skill-tag text-xs">Laravel</span>
+            <span class="skill-tag text-xs">Angular JS</span>
+            <span class="skill-tag text-xs">Google Maps</span>
+            <span class="skill-tag text-xs">Stripe</span>
+            <span class="skill-tag text-xs">PayPal</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Project 5: Pizza House -->
+      <div class="reveal reveal-delay-2 card-glass rounded-2xl overflow-hidden group">
+        <div class="relative h-48 overflow-hidden">
+          <img src="../assets/pizzahouse.png" alt="Pizza House USA" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" />
+          <div style="display:none" class="w-full h-full bg-gradient-to-br from-orange-900/60 to-surface-700 items-center justify-center">
+            <div class="text-center space-y-2">
+              <div class="w-16 h-16 mx-auto rounded-2xl bg-orange-500/20 border border-orange-500/30 flex items-center justify-center">
+                <svg class="w-8 h-8 text-orange-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" stroke-width="1.5"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8 12h8M8 8h8M8 16h6"/></svg>
+              </div>
+              <span class="text-xs text-orange-400 font-mono">Restaurant</span>
+            </div>
+          </div>
+          <div class="absolute inset-0 bg-gradient-to-t from-surface-900/90 to-transparent"></div>
+          <div class="absolute bottom-3 left-4">
+            <span class="text-xs font-mono text-orange-400 bg-orange-500/20 px-2.5 py-1 rounded-full border border-orange-500/30">Restaurant E-Commerce</span>
+          </div>
+        </div>
+        <div class="p-6 space-y-4">
+          <div>
+            <a href="https://pizzahouseusa.com/" target="_blank" class="text-xs font-mono text-orange-400 bg-orange-500/10 px-2.5 py-1 rounded-full border border-orange-500/20 hover:bg-orange-500/20 transition">pizzahouseusa.com ↗</a>
+            <h3 class="text-white font-semibold text-lg mt-3">Pizza House USA</h3>
+            <p class="text-gray-400 text-sm leading-relaxed mt-2">Restaurant ordering platform with a custom pizza builder, dynamic pricing, and an order management system for a USA-based chain.</p>
+          </div>
+          <div class="flex flex-wrap gap-1.5">
+            <span class="skill-tag text-xs">Laravel</span>
+            <span class="skill-tag text-xs">Angular JS</span>
+            <span class="skill-tag text-xs">MySQL</span>
+            <span class="skill-tag text-xs">jQuery</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Project 6: CarPlusOK -->
+      <div class="reveal reveal-delay-3 card-glass rounded-2xl overflow-hidden group">
+        <div class="relative h-48 overflow-hidden">
+          <img src="../assets/carplusok.jpg" alt="CarPlusOK" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" />
+          <div style="display:none" class="w-full h-full bg-gradient-to-br from-rose-900/60 to-surface-700 items-center justify-center">
+            <div class="text-center space-y-2">
+              <div class="w-16 h-16 mx-auto rounded-2xl bg-rose-500/20 border border-rose-500/30 flex items-center justify-center">
+                <svg class="w-8 h-8 text-rose-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+              </div>
+              <span class="text-xs text-rose-400 font-mono">E-Commerce</span>
+            </div>
+          </div>
+          <div class="absolute inset-0 bg-gradient-to-t from-surface-900/90 to-transparent"></div>
+          <div class="absolute bottom-3 left-4">
+            <span class="text-xs font-mono text-rose-400 bg-rose-500/20 px-2.5 py-1 rounded-full border border-rose-500/30">Auto Parts Shop</span>
+          </div>
+        </div>
+        <div class="p-6 space-y-4">
+          <div>
+            <a href="http://carplusok.com/" target="_blank" class="text-xs font-mono text-rose-400 bg-rose-500/10 px-2.5 py-1 rounded-full border border-rose-500/20 hover:bg-rose-500/20 transition">carplusok.com ↗</a>
+            <h3 class="text-white font-semibold text-lg mt-3">CarPlusOK</h3>
+            <p class="text-gray-400 text-sm leading-relaxed mt-2">Dynamic e-commerce platform for a USA-based old car parts retailer with catalog management, search, and checkout functionality.</p>
+          </div>
+          <div class="flex flex-wrap gap-1.5">
+            <span class="skill-tag text-xs">Laravel</span>
+            <span class="skill-tag text-xs">HTML5 / CSS3</span>
+            <span class="skill-tag text-xs">jQuery</span>
+            <span class="skill-tag text-xs">MySQL</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════ CONTACT ══ -->
+<section id="contact" class="relative py-28 overflow-hidden">
+  <div class="shape w-96 h-96 bg-primary-500/8 -bottom-20 -right-20"></div>
+  <div class="max-w-6xl mx-auto px-6">
+    <div class="text-center mb-16 reveal">
+      <span class="section-eyebrow">Get in touch</span>
+      <h2 class="mt-3 text-3xl sm:text-4xl font-bold text-white">Let's Work Together</h2>
+      <p class="mt-4 text-gray-400 max-w-lg mx-auto">Have a project in mind or want to discuss opportunities? I'd love to hear from you.</p>
+    </div>
+
+    <div class="grid lg:grid-cols-5 gap-10 items-start">
+
+      <!-- Contact info -->
+      <div class="lg:col-span-2 reveal reveal-delay-1 space-y-5">
+        <div class="card-glass rounded-2xl p-6 flex items-start gap-4">
+          <div class="w-11 h-11 rounded-xl bg-primary-500/15 flex items-center justify-center flex-shrink-0">
+            <svg class="w-5 h-5 text-primary-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+          </div>
+          <div>
+            <div class="text-sm text-gray-500 mb-1">Email</div>
+            <a href="mailto:emarufhasan@gmail.com" class="text-white font-medium hover:text-primary-400 transition-colors">emarufhasan@gmail.com</a>
+          </div>
+        </div>
+
+        <div class="card-glass rounded-2xl p-6 flex items-start gap-4">
+          <div class="w-11 h-11 rounded-xl bg-primary-500/15 flex items-center justify-center flex-shrink-0">
+            <svg class="w-5 h-5 text-primary-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+          </div>
+          <div>
+            <div class="text-sm text-gray-500 mb-1">Location</div>
+            <div class="text-white font-medium">Dhaka, Bangladesh</div>
+            <div class="text-gray-400 text-sm mt-0.5">Open to remote worldwide</div>
+          </div>
+        </div>
+
+        <div class="card-glass rounded-2xl p-6 flex items-start gap-4">
+          <div class="w-11 h-11 rounded-xl bg-primary-500/15 flex items-center justify-center flex-shrink-0">
+            <svg class="w-5 h-5 text-primary-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+          </div>
+          <div>
+            <div class="text-sm text-gray-500 mb-1">Response time</div>
+            <div class="text-white font-medium">Within 24 hours</div>
+          </div>
+        </div>
+
+        <!-- Social links -->
+        <div class="card-glass rounded-2xl p-6">
+          <div class="text-sm text-gray-500 mb-4">Find me on</div>
+          <div class="flex gap-3">
+            <a href="https://github.com/marufhasan1" target="_blank" class="flex-1 flex items-center justify-center gap-2 py-2.5 rounded-xl bg-white/5 hover:bg-white/10 text-gray-400 hover:text-white transition text-sm font-medium">
+              <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 .5C5.648.5.5 5.648.5 12c0 5.084 3.292 9.386 7.863 10.908.575.107.783-.248.783-.552v-1.93C5.96 21.02 5.28 18.9 5.28 18.9c-.522-1.327-1.275-1.68-1.275-1.68-1.042-.712.08-.698.08-.698 1.153.081 1.76 1.185 1.76 1.185 1.024 1.754 2.687 1.248 3.343.954.104-.742.4-1.248.728-1.535-2.553-.29-5.237-1.276-5.237-5.678 0-1.254.448-2.279 1.184-3.084-.119-.291-.514-1.46.112-3.043 0 0 .966-.309 3.165 1.18.917-.255 1.9-.382 2.876-.387.976.005 1.96.132 2.877.387 2.197-1.489 3.162-1.18 3.162-1.18.628 1.583.233 2.752.114 3.043.738.805 1.183 1.83 1.183 3.084 0 4.413-2.688 5.385-5.25 5.668.414.355.782 1.057.782 2.13v3.162c0 .307.207.665.79.551C20.71 21.383 24 17.082 24 12c0-6.352-5.148-11.5-12-11.5z"/></svg>
+              GitHub
+            </a>
+            <a href="https://linkedin.com/in/emarufhasan" target="_blank" class="flex-1 flex items-center justify-center gap-2 py-2.5 rounded-xl bg-white/5 hover:bg-white/10 text-gray-400 hover:text-white transition text-sm font-medium">
+              <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+              LinkedIn
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Contact form -->
+      <div class="lg:col-span-3 reveal reveal-delay-2">
+        <div class="card-glass rounded-2xl p-8">
+          <form id="contact-form" class="space-y-5" novalidate>
+            <div class="grid sm:grid-cols-2 gap-5">
+              <div>
+                <label class="block text-sm font-medium text-gray-400 mb-2">Full Name</label>
+                <input type="text" name="name" id="name" placeholder="John Doe" class="form-input" required />
+                <p class="text-red-400 text-xs mt-1 hidden" id="name-error">Please enter your name.</p>
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-gray-400 mb-2">Email Address</label>
+                <input type="email" name="email" id="email" placeholder="john@example.com" class="form-input" required />
+                <p class="text-red-400 text-xs mt-1 hidden" id="email-error">Please enter a valid email.</p>
+              </div>
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-gray-400 mb-2">Subject</label>
+              <input type="text" name="subject" id="subject" placeholder="Project inquiry..." class="form-input" required />
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-gray-400 mb-2">Message</label>
+              <textarea name="message" id="message" rows="5" placeholder="Tell me about your project or idea..." class="form-input resize-none" required></textarea>
+              <p class="text-red-400 text-xs mt-1 hidden" id="message-error">Please enter your message.</p>
+            </div>
+            <button type="submit" id="submit-btn" class="btn-primary w-full justify-center py-3.5">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"/></svg>
+              Send Message
+            </button>
+            <p id="form-success" class="hidden text-center text-emerald-400 text-sm font-medium py-2">Message sent! I'll get back to you soon.</p>
+            <p id="form-error-msg" class="hidden text-center text-red-400 text-sm py-2">Something went wrong. Please email me directly.</p>
+          </form>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════ FOOTER ══ -->
+<footer class="border-t border-white/5 py-10">
+  <div class="max-w-6xl mx-auto px-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-gray-500">
+    <div class="flex items-center gap-2">
+      <span class="font-mono text-primary-400 font-bold">&lt;MH /&gt;</span>
+      <span>MD. Maruf Hasan</span>
+    </div>
+    <div>Built with HTML, TailwindCSS &amp; JavaScript</div>
+    <div>&copy; <span id="footer-year"></span> All rights reserved.</div>
+  </div>
+</footer>
+
+
+<!-- ═══════════════════════════════════════════ SCRIPTS ══ -->
+<script>
+// ── Year ──
+document.getElementById('footer-year').textContent = new Date().getFullYear();
+
+// ── Navbar scroll ──
+const navbar = document.getElementById('navbar');
+window.addEventListener('scroll', () => {
+  navbar.classList.toggle('scrolled', window.scrollY > 50);
+});
+
+// ── Active nav link on scroll ──
+const sections = document.querySelectorAll('section[id]');
+const navLinks = document.querySelectorAll('.nav-link');
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      navLinks.forEach(link => {
+        link.classList.toggle('active', link.getAttribute('href') === '#' + entry.target.id);
+      });
+    }
+  });
+}, { rootMargin: '-40% 0px -55% 0px' });
+sections.forEach(s => observer.observe(s));
+
+// ── Mobile menu ──
+const hamburger = document.getElementById('hamburger');
+const mobileMenu = document.getElementById('mobile-menu');
+const iconOpen  = document.getElementById('icon-open');
+const iconClose = document.getElementById('icon-close');
+let menuOpen = false;
+
+function toggleMenu(force) {
+  menuOpen = force !== undefined ? force : !menuOpen;
+  mobileMenu.classList.toggle('hidden', !menuOpen);
+  iconOpen.classList.toggle('hidden', menuOpen);
+  iconClose.classList.toggle('hidden', !menuOpen);
+  document.body.style.overflow = menuOpen ? 'hidden' : '';
+}
+
+hamburger.addEventListener('click', () => toggleMenu());
+document.querySelectorAll('.mobile-nav').forEach(link => {
+  link.addEventListener('click', () => toggleMenu(false));
+});
+
+// ── Reveal on scroll ──
+const revealEls = document.querySelectorAll('.reveal');
+const revealObs = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+      revealObs.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.12 });
+revealEls.forEach(el => revealObs.observe(el));
+
+// ── Skill bars ──
+const skillObs = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.querySelectorAll('.skill-bar-fill').forEach(fill => {
+        setTimeout(() => { fill.style.width = fill.dataset.width + '%'; }, 200);
+      });
+      skillObs.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.3 });
+document.querySelectorAll('.card-glass').forEach(card => {
+  if (card.querySelector('.skill-bar-fill')) skillObs.observe(card);
+});
+
+// ── Typing animation ──
+const words = ['Full-Stack Developer', 'Laravel Specialist', 'Vue.js Expert', 'ERP Architect', 'DevOps Engineer'];
+let wIdx = 0, cIdx = 0, deleting = false;
+const typedEl = document.getElementById('typed-text');
+
+function type() {
+  const word = words[wIdx];
+  if (!deleting) {
+    typedEl.textContent = word.slice(0, cIdx + 1);
+    cIdx++;
+    if (cIdx === word.length) { deleting = true; setTimeout(type, 1800); return; }
+  } else {
+    typedEl.textContent = word.slice(0, cIdx - 1);
+    cIdx--;
+    if (cIdx === 0) { deleting = false; wIdx = (wIdx + 1) % words.length; }
+  }
+  setTimeout(type, deleting ? 60 : 95);
+}
+type();
+
+// ── Hero reveal on load ──
+window.addEventListener('load', () => {
+  document.querySelectorAll('#hero .reveal').forEach(el => {
+    el.classList.add('visible');
+  });
+});
+
+// ── Contact form ──
+const form = document.getElementById('contact-form');
+form.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const name    = document.getElementById('name');
+  const email   = document.getElementById('email');
+  const message = document.getElementById('message');
+  const btn     = document.getElementById('submit-btn');
+  let valid = true;
+
+  // Validate
+  document.getElementById('name-error').classList.toggle('hidden', name.value.trim() !== '');
+  document.getElementById('email-error').classList.toggle('hidden', /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value));
+  document.getElementById('message-error').classList.toggle('hidden', message.value.trim() !== '');
+
+  if (!name.value.trim()) valid = false;
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value)) valid = false;
+  if (!message.value.trim()) valid = false;
+  if (!valid) return;
+
+  btn.disabled = true;
+  btn.innerHTML = '<svg class="w-4 h-4 animate-spin" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg> Sending...';
+
+  try {
+    const res = await fetch('../mail.php', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        name: name.value,
+        email: email.value,
+        subject: document.getElementById('subject').value,
+        message: message.value
+      })
+    });
+    if (res.ok) {
+      document.getElementById('form-success').classList.remove('hidden');
+      form.reset();
+    } else throw new Error();
+  } catch {
+    document.getElementById('form-error-msg').classList.remove('hidden');
+  } finally {
+    btn.disabled = false;
+    btn.innerHTML = '<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"/></svg> Send Message';
+  }
+});
+
+// ── Smooth scroll for all anchor links ──
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    const target = document.querySelector(a.getAttribute('href'));
+    if (target) {
+      e.preventDefault();
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  });
+});
+</script>
+
+</body>
+</html>
