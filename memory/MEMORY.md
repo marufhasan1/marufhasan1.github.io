@@ -4,7 +4,7 @@
 - Name: MD. Maruf Hasan
 - Email: emarufhasan@gmail.com
 - Location: Dhaka, Bangladesh
-- Domain: marufhasan.net
+- Domain: maruf-hasan.com
 
 ## Project Structure
 - `/index.html` — original portfolio (Bootstrap 4, jQuery, purple theme)
