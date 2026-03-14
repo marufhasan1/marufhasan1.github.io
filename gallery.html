@@ -758,7 +758,7 @@ function buildGrid(filter) {
     } else {
       item.innerHTML = `
         <div style="position:relative; overflow:hidden;">
-          <img src="${photo.src}" alt="${photo.caption}" loading="lazy" class="w-full block" />
+          <img src="${photo.src}" alt="MD. Maruf Hasan - ${photo.caption}" loading="lazy" class="w-full block" />
           <div class="item-overlay">
             <div class="caption space-y-1.5">
               <span class="cat-badge">${catLabel[photo.category] || photo.category}</span>
@@ -841,14 +841,14 @@ function showPhoto(idx) {
 
   if (photo.placeholder) {
     lbImg.src = '';
-    lbImg.alt = photo.caption;
+    lbImg.alt = 'MD. Maruf Hasan - ' + photo.caption;
     // Show gradient placeholder in lightbox too
     lbImg.style.display = 'none';
     document.getElementById('lightbox-img-wrap').style.background = '';
   } else {
     lbImg.style.display = '';
     lbImg.src = photo.src || photo.thumb || '';
-    lbImg.alt = photo.caption;
+    lbImg.alt = 'MD. Maruf Hasan - ' + photo.caption;
     lbImg.onload = () => { lbImg.style.opacity = '1'; };
   }
 
